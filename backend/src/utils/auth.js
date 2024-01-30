@@ -2,21 +2,20 @@ import jwt from "jsonwebtoken";
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    const isCustomAuth = token.length < 500;
+    let token = req.cookies.token;
 
-    let decodedData;
+    // Remove Bearer from string
+    token = token.split("Bearer ")[1];
 
-    if (token && isCustomAuth) {
-      decodedData = jwt.verify(token, "test");
-      req.userId = decodedData?._id;
-    } else {
-      decodedData = jwt.decode(token);
-      req.userId = decodedData?.sub;
+    if (!token) {
+      return res.status(403).send("A token is required for authentication");
     }
-
-    next();
-  } catch (error) { }
+    const decoded = jwt.verify(token, "test");
+    req.id = decoded._id;
+    return next();
+  } catch (err) {
+    return res.status(401).json("Invalid Token");
+  }
 };
 
 export default auth;
