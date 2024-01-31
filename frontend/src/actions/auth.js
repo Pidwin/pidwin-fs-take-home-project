@@ -24,6 +24,16 @@ export const login = (formData, history) => async (dispatch) => {
   }
 };
 
+export const logoutUser = (history) => async (dispatch) => {
+  try {
+    const { data } = await api.logout();
+    dispatch({ type: LOGOUT, data });
+    history("/auth");
+  } catch (error) {
+    messages.error(error.response.data.message);
+  }
+};
+
 export const changePassword = (formData, history) => async (dispatch) => {
   try {
     const { data } = await api.changePassword(formData);

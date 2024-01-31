@@ -21,11 +21,6 @@ export const styles = {
     justifyContent: "flex-end",
     width: "1000px",
   },
-  profile: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "600px",
-  },
   userName: {
     display: "flex",
     alignItems: "center",
@@ -33,6 +28,7 @@ export const styles = {
   brandContainer: {
     display: "flex",
     alignItems: "center",
+    flexDirection: 'column',
   },
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
