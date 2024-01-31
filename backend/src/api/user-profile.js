@@ -7,6 +7,8 @@ const userProfile = async (req, res) => {
       id: user._id,
       name: user.name,
       tokens: user.tokens,
+      tossHistory: user.tossHistory,
+      consecutiveWins: user.consecutiveWins,
     })
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong"});

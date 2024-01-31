@@ -33,6 +33,28 @@ const Home = () => {
         <Paper elevation={3} sx={{marginTop: 3}}>
           <TossCoin userId={user?.id}/>
         </Paper>
+        <Paper elevation={3} sx={{marginTop: 3, padding: 3}}>
+          <Typography variant="h4" align="left" color="primary" marginBottom={3}>
+            Consecutive Wins: {user.consecutiveWins}
+          </Typography>
+          <Typography variant="h4" align="left" color="primary" marginBottom={3}>
+            Last 10 Tosses:
+          </Typography>
+
+          {user?.tossHistory?.length === 0 &&
+            <Typography variant="body1" color="secondary" align="center">
+              No toss history found
+            </Typography>
+          }
+
+          {user && user.tossHistory.map((toss, index) => (
+            <Typography key={toss._id} variant="body1" color="secondary" align="left">
+              {index === 0 ? 'Last toss: ' : 'Previous toss: '}
+              {toss.win ? 'Won ' : 'Lost '}
+              {toss.amount} Tokens
+            </Typography>
+          ))}
+        </Paper>
       </Container>
     </Grow>
   );

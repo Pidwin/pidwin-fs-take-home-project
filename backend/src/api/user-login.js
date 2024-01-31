@@ -31,7 +31,7 @@ const login = async (req, res) => {
     res.cookie('token', 'Bearer ' + token, {
       httpOnly: true,
       sameSite: 'lax',
-      maxAge: 1000 // 1 hour
+      maxAge: 1000 * 60 * 60 // 1 hour
     });
 
     res.status(200).end();

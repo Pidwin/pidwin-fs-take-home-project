@@ -9,6 +9,11 @@ const userSchema = mongoose.Schema({
     type: Number,
     default: 100,
   },
+  tossHistory: [{
+    win: Boolean,
+    amount: Number,
+  }],
+  consecutiveWins: Number,
 });
 
 export default mongoose.model("User", userSchema);

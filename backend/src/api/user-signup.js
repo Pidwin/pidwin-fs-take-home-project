@@ -26,7 +26,7 @@ const signup = async (req, res) => {
 
     res.cookie('token', 'Bearer ' + token, {
       httpOnly: true,
-      sameSite: 'lax', // or 'strict'
+      sameSite: 'lax',
       // secure: true, // enable this on production for https only
       maxAge: 1000 * 60 * 60 // 1 hour
     });
