@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import Game from "../models/game.js";
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -29,12 +30,11 @@ const login = async (req, res) => {
         password: existingUser.password,
       },
       "test",
-      { expiresIn: "1h" }
+      { expiresIn: "5d" }
     );
-
     res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(500).json({ message: "Error logging in" });
   }
 };
 

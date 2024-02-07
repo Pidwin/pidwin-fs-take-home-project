@@ -7,9 +7,10 @@ export const signup = (formData, history) => async (dispatch) => {
     const { data } = await api.signUp(formData);
     dispatch({ type: LOGIN, data });
     history("/");
-    messages.success("Login Successful");
+    messages.success("Sign Up Successful");
   } catch (error) {
-    messages.error(error.response.data.message);
+    messages.error("Error Signing Up");
+    console.error(error);
   }
 };
 
@@ -20,7 +21,8 @@ export const login = (formData, history) => async (dispatch) => {
     history("/");
     messages.success("Login Successful");
   } catch (error) {
-    messages.error(error.response.data.message);
+    messages.error("Error Logging In");
+    console.error(error);
   }
 };
 
@@ -31,6 +33,7 @@ export const changePassword = (formData, history) => async (dispatch) => {
     messages.success("Password Change Was Successful");
     history("/");
   } catch (error) {
-    messages.error(error.response.data.message);
+    messages.error("Error Changing Password");
+    console.error(error);
   }
 };

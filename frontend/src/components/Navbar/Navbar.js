@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Typography, Toolbar, Avatar, Button } from "@mui/material";
+import { AppBar, Typography, Avatar, Button } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import * as actionType from "../../constants/actionTypes";
 import { styles } from "./styles";
@@ -12,6 +12,9 @@ const Navbar = () => {
       ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
       : "null"
   );
+
+  const [showMenu, setShowMenu] = useState(false);
+
   const dispatch = useDispatch();
   let location = useLocation();
   const history = useNavigate();
@@ -33,6 +36,8 @@ const Navbar = () => {
     );
   }, [location]);
 
+  const { tokens } = useSelector((state) => state.game);
+
   return (
     <AppBar sx={styles.appBar} position="static" color="inherit">
       <div sx={styles.brandContainer}>
@@ -40,50 +45,66 @@ const Navbar = () => {
           component={Link}
           to="/"
           sx={styles.heading}
-          variant="h5"
+          variant="h4"
           align="center"
         >
           CoinToss
         </Typography>
       </div>
-      <Toolbar sx={styles.toolbar}>
-        {user !== "null" && user !== null ? (
-          <div sx={styles.profile}>
-            <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
+      {user !== "null" && user !== null && (
+        <div style={styles.tokensContainer}>
+          <img
+            style={styles.goldToken}
+            srcSet={require("../../assets/gold-token.png")}
+            src={require("../../assets//gold-token.png")}
+            alt={"Gold tokens image"}
+          />
+          <Typography sx={styles.tokensCount} variant="h3">
+            {tokens}
+          </Typography>
+        </div>
+      )}
+
+      {user !== "null" && user !== null ? (
+        <div style={styles.profile}>
+          <div
+            style={styles.avatarContainer}
+            onClick={() => setShowMenu(!showMenu)}
+          >
+            <Avatar sx={styles.avatar} alt={user.name} src={user.picture}>
               {user.name.charAt(0)}
             </Avatar>
-            <Typography sx={styles.userName} variant="h6">
+            <Typography sx={styles.userName} variant="h6" color="primary">
               {user.name}
             </Typography>
-            <Button
-              variant="contained"
-              sx={styles.logout}
-              color="secondary"
-              onClick={logout}
-            >
-              Logout
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                history("/password");
-              }}
-            >
-              Set Password
-            </Button>
+            {showMenu && (
+              <div style={styles.menu}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    history("/password");
+                  }}
+                >
+                  Set Password
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={styles.menuButton}
+                  color="secondary"
+                  onClick={logout}
+                >
+                  Logout
+                </Button>
+              </div>
+            )}
           </div>
-        ) : (
-          <Button
-            component={Link}
-            to="/auth"
-            variant="contained"
-            color="primary"
-          >
-            Login
-          </Button>
-        )}
-      </Toolbar>
+        </div>
+      ) : (
+        <Button component={Link} to="/auth" variant="contained" color="primary">
+          Login
+        </Button>
+      )}
     </AppBar>
   );
 };
