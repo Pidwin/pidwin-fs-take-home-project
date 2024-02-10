@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from "react";
 import {
-  Avatar,
   Button,
   Container,
-  Grid,
   Paper,
-  Typography,
   Box,
-  FormControl,
   FormControlLabel,
-  Input,
-  InputLabel,
   TextField,
   RadioGroup,
   Radio,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import LockIcon from "@mui/icons-material/LockOutlined";
 import { styles } from "./styles";
 import { getTokens } from "../../actions/tokens";
+import { tossCoin } from "../../actions/coin";
 
 const CoinToss = () => {
   const [wager, setWager] = useState(0);
@@ -43,18 +37,15 @@ const CoinToss = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(tossCoin(wager));
-    const headsOrTails = heads ? "heads" : "tails";
-    console.log("Tossing Coin");
-    console.log("Wager: ", wager);
-    console.log("Guess: ", headsOrTails);
+    if (maxWagerExceeded) {
+      return;
+    }
+    const choice = heads ? "heads" : "tails";
+    dispatch(tossCoin(wager, choice));
   };
 
   const handleWagerChange = (e) => {
-    console.log(typeof e.target.value);
     const wagerAmount = parseInt(e.target.value, 10);
-    console.log(typeof wagerAmount);
-    console.log("Wager: ", e.target.value);
     setWager(wagerAmount);
   };
 
@@ -77,8 +68,8 @@ const CoinToss = () => {
               row
               aria-label="heads"
               name="heads"
-              value={heads}
-              onChange={(e) => setHeads(e.target.value)}
+              value={String(heads)}
+              onChange={(e) => setHeads(e.target.value === "true")}
             >
               <FormControlLabel
                 value="true"

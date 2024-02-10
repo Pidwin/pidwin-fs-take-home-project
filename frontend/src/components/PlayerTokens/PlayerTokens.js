@@ -12,6 +12,7 @@ const PlayerTokens = () => {
     dispatch(getTokens());
   }, [dispatch]);
 
+  console.log(playerTokens);
   return (
     <div>
       <Typography>Player Tokens: {playerTokens}</Typography>

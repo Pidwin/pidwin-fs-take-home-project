@@ -1,4 +1,4 @@
-import { GET_TOKENS } from "../constants/actionTypes";
+import { GET_TOKENS, UPDATE_TOKEN_COUNT } from "../constants/actionTypes";
 import * as api from "../api";
 import * as messages from "../messages";
 
@@ -9,4 +9,8 @@ export const getTokens = () => async (dispatch) => {
   } catch (error) {
     messages.error(error.response.data.message);
   }
+};
+
+export const updateTokenCount = (newTokenCount) => async (dispatch) => {
+  dispatch({ type: UPDATE_TOKEN_COUNT, payload: newTokenCount });
 };
