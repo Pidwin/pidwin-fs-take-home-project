@@ -67,7 +67,7 @@ const Login = () => {
               {" "}
               <LockIcon />
             </Avatar>
-            <Typography variant="h5" color="primary">
+            <Typography sx={styles.formHeading} variant="h5" color="primary">
               {isLoggedIn ? "Login" : "Logout"}
             </Typography>
             <form sx={styles.form} onSubmit={handleSubmit}>

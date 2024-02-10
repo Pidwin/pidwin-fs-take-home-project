@@ -8,6 +8,9 @@ export const styles = {
     alignItems: "center",
     padding: theme.spacing(2),
   },
+  formHeading: {
+    marginBottom: "15px",
+  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: "#5e5d5c",

@@ -2,39 +2,53 @@ import { theme } from "../../themes/Default";
 import { deepPurple } from "@mui/material/colors";
 
 export const styles = {
-  appBar: {
-    borderRadius: 15,
-    margin: "30px 0",
+  flippingPopover: {
     display: "flex",
-    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    background: "rgba(0, 0, 0, 0.6)",
+    zIndex: 1,
+  },
+  page: {
+    display: "flex",
+  },
+  formContainer: {
+    padding: "15px",
+  },
+  form: {
+    display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
-    padding: "10px 50px",
+    padding: "15px 0",
   },
-  heading: {
-    color: "rgba(0,183,255, 1)",
-    textDecoration: "none",
-  },
-  toolbar: {
+  gameContainer: {
     display: "flex",
-    justifyContent: "flex-end",
-    width: "1000px",
+    flexDirection: "column",
   },
-  profile: {
+  resultsContainer: {
+    padding: "15px",
+    marginBottom: "15px",
+  },
+  resultsRow: {
     display: "flex",
     justifyContent: "space-between",
-    width: "400px",
+    margin: "7.5px 0",
   },
-  userName: {
+  resultsCoinSide: {
     display: "flex",
-    alignItems: "center",
   },
-  brandContainer: {
-    display: "flex",
-    alignItems: "center",
+  resultsCoinSideLabel: {
+    marginRight: "15px",
   },
-  purple: {
-    color: theme.palette.getContrastText(deepPurple[500]),
-    backgroundColor: deepPurple[500],
+  recentsContainer: {
+    padding: "15px",
+  },
+  loginToPlay: {
+    padding: "15px 0",
+    cursor: "pointer",
   },
 };

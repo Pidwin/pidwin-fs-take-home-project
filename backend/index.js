@@ -2,8 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import userRouter from "./src/api/user.js";
+import gameRouter from "./src/api/game.js";
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
 
 app.use(cors());
 app.use("/api/user", userRouter);
+app.use("/api/game", gameRouter);
 
 const PORT = process.env.PORT || 5000;
 

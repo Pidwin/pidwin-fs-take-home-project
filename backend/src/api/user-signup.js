@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import Game from "../models/game.js";
 
 const signup = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
@@ -29,12 +30,19 @@ const signup = async (req, res) => {
         password: result.hashedPassword,
       },
       "test",
-      { expiresIn: "1h" }
+      { expiresIn: "5d" }
     );
+
+    await Game.create({
+      email,
+      tokens: 100,
+      winStreak: 0,
+      recentResults: [],
+    });
 
     res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(500).json({ message: "Error signing up" });
     console.log(error);
   }
 };
