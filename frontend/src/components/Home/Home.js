@@ -1,22 +1,25 @@
 import React from "react";
 import { Container, Grow, Paper, Typography } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
+import CoinToss from "../CoinToss/CoinToss";
 
 const Home = () => {
-
   const user = localStorage.getItem("profile")
     ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
     : "null";
-  const isSingedIn = user;
+  const isSignedIn = user;
 
   return (
     <Grow in>
       <Container component="main" maxWidth="sm">
         <Paper elevation={3}>
-          {isSingedIn !== "null" && isSingedIn !== null ? (
-            <Typography variant="h4" align="center" color="primary">
-              {`Welcome ${user.name}`}
-            </Typography>
+          {isSignedIn !== "null" && isSignedIn !== null ? (
+            <>
+              <Typography variant="h4" align="center" color="primary">
+                {`Welcome ${user.name}`}
+              </Typography>
+              <CoinToss />
+            </>
           ) : (
             <Typography variant="h4" align="center" color="primary">
               Login to Play
