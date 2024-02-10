@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import * as actionType from "../../constants/actionTypes";
 import { styles } from "./styles";
+import PlayerTokens from "../PlayerTokens/PlayerTokens";
 
 const Navbar = () => {
   const [user, setUser] = useState(
@@ -12,6 +13,7 @@ const Navbar = () => {
       ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
       : "null"
   );
+
   const dispatch = useDispatch();
   let location = useLocation();
   const history = useNavigate();
@@ -48,31 +50,34 @@ const Navbar = () => {
       </div>
       <Toolbar sx={styles.toolbar}>
         {user !== "null" && user !== null ? (
-          <div sx={styles.profile}>
-            <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
-              {user.name.charAt(0)}
-            </Avatar>
-            <Typography sx={styles.userName} variant="h6">
-              {user.name}
-            </Typography>
-            <Button
-              variant="contained"
-              sx={styles.logout}
-              color="secondary"
-              onClick={logout}
-            >
-              Logout
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                history("/password");
-              }}
-            >
-              Set Password
-            </Button>
-          </div>
+          <>
+            <PlayerTokens />
+            <div sx={styles.profile}>
+              <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
+                {user.name.charAt(0)}
+              </Avatar>
+              <Typography sx={styles.userName} variant="h6">
+                {user.name}
+              </Typography>
+              <Button
+                variant="contained"
+                sx={styles.logout}
+                color="secondary"
+                onClick={logout}
+              >
+                Logout
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  history("/password");
+                }}
+              >
+                Set Password
+              </Button>
+            </div>
+          </>
         ) : (
           <Button
             component={Link}
