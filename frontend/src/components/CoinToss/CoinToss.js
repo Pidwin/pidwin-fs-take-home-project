@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { styles } from "./styles";
-import { getTokens } from "../../actions/tokens";
 import { tossCoin } from "../../actions/coin";
 
 const CoinToss = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Grow, Paper, Typography } from "@mui/material";
+import { Container, Grow } from "@mui/material";
 import { useSelector } from "react-redux";
 import MostRecentResult from "./MostRecentResult";
 import FullHistory from "./FullHistory";

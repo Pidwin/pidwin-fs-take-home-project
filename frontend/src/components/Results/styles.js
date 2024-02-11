@@ -1,5 +1,4 @@
 import { theme } from "../../themes/Default";
-import { deepPurple } from "@mui/material/colors";
 
 export const styles = {
   resultsContainer: {

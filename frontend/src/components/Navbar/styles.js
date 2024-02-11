@@ -23,8 +23,10 @@ export const styles = {
   },
   profile: {
     display: "flex",
+    flexShrink: 1,
+    flexDirection: "column",
+    gap: "8px",
     justifyContent: "space-between",
-    width: "600px",
   },
   userName: {
     display: "flex",

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Grid, Grow, Paper, Typography } from "@mui/material";
+import { Box, Grid, Grow, Paper, Typography } from "@mui/material";
 import { styles } from "./styles";
 
 const FullHistory = ({ history }) => {
