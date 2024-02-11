@@ -10,7 +10,6 @@ import * as messages from "../messages";
 export const signup = (formData, history) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
-    console.log(data);
     dispatch({ type: LOGIN, data: { token: data.token } });
     dispatch({ type: UPDATE_TOKEN_COUNT, data: data.playerTokens });
     dispatch({ type: CLEAR_TOSS_HISTORY });

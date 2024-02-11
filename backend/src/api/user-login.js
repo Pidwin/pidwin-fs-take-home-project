@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
 const login = async (req, res) => {
-  console.log("Login has been triggered.");
   const { email, password } = req.body;
 
   try {

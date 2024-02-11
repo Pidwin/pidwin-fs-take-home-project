@@ -1,7 +1,6 @@
 import User from "../models/user.js";
 
 export const tossCoin = async (req, res) => {
-  console.log("Toss Coin has been called");
   if (!req.userId) {
     return res.status(401).json({ message: "Unauthenticated" });
   }
