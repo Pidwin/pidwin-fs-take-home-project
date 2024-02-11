@@ -12,8 +12,12 @@ const Results = () => {
   return (
     // <Grow in>
     <Container component="main" maxWidth="md">
-      <MostRecentResult mostRecentResult={mostRecentResult} />
-      <FullHistory history={coinState.history} />
+      {coinState.history.length > 0 && (
+        <>
+          <MostRecentResult mostRecentResult={mostRecentResult} />
+          <FullHistory history={coinState.history} />
+        </>
+      )}
     </Container>
   );
 };

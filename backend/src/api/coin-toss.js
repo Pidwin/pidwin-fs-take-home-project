@@ -7,9 +7,6 @@ export const tossCoin = async (req, res) => {
   }
   const userId = req.userId;
   const { wager, choice } = req.body;
-  console.log("wager: ", wager);
-  console.log("choice: ", choice);
-  console.log("userId: ", userId);
 
   try {
     const existingUser = await User.findById(userId);
@@ -21,30 +18,51 @@ export const tossCoin = async (req, res) => {
     }
     const result = Math.random() < 0.5 ? "heads" : "tails";
 
-    console.log("result: ", result);
-
     let newTokens = 0;
+    let megaBonus = false;
+    let bonus = false;
+
     if (result === choice) {
-      newTokens = existingUser.tokens + wager;
+      existingUser.streak += 1;
+
+      if (existingUser.streak === 5) {
+        megaBonus = true;
+        newTokens = existingUser.tokens + wager * 9;
+        existingUser.streak = 0;
+      } else if (existingUser.streak === 3) {
+        bonus = true;
+        newTokens = existingUser.tokens + wager * 2;
+      } else {
+        newTokens = existingUser.tokens + wager;
+      }
     } else {
       newTokens = existingUser.tokens - wager;
+      existingUser.streak = 0;
     }
-    console.log("newTokens: ", newTokens);
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       {
         tokens: newTokens,
+        streak: existingUser.streak,
         $push: {
           coinTosses: {
-            $each: [{ win: result === choice, wager, guess: choice, result }],
+            $each: [
+              {
+                win: result === choice,
+                bonus,
+                megaBonus,
+                wager,
+                guess: choice,
+                result,
+              },
+            ],
             $slice: -10,
           },
         },
       },
       { new: true }
     );
-    console.log("updatedUser: ", updatedUser);
 
     res.status(200).json({
       tokens: updatedUser.tokens,

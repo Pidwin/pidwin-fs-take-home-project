@@ -10,7 +10,7 @@ const Home = () => {
     : "null";
   const isSignedIn = user;
 
-  const isLoggedIn = isSignedIn !== "null" || isSignedIn !== null;
+  const isLoggedIn = isSignedIn !== "null" && isSignedIn !== null;
   return (
     <>
       <Grow in>
@@ -31,7 +31,7 @@ const Home = () => {
           </Paper>
         </Container>
       </Grow>
-      {isSignedIn && <Results />}
+      {isLoggedIn && <Results />}
     </>
   );
 };

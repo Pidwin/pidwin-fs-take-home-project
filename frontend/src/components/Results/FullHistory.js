@@ -3,6 +3,9 @@ import { Box, Container, Grid, Grow, Paper, Typography } from "@mui/material";
 import { styles } from "./styles";
 
 const FullHistory = ({ history }) => {
+  if (!history) {
+    return null;
+  }
   return (
     <Box
       sx={{
@@ -30,7 +33,9 @@ const FullHistory = ({ history }) => {
         {history.map((result, index) => (
           <Grid item xs={1} key={index}>
             <Box sx={{ textAlign: "center", height: "24px" }}>
-              {index === 0 && <Typography>Oldest</Typography>}
+              {index === 0 && history.length > 1 && (
+                <Typography>Oldest</Typography>
+              )}
               {index === history.length - 1 && <Typography>Current</Typography>}
               {index !== 0 && index !== history.length - 1 && (
                 <Typography>{index + 1}</Typography>
@@ -78,10 +83,6 @@ const FullHistory = ({ history }) => {
                   <Typography sx={[styles.coinToss, { fontSize: "0.5rem" }]}>
                     {result.guess}/{result.result}
                   </Typography>
-                  {result.bonus && (
-                    <Typography sx={styles.bonusHeader}>Bonus!</Typography>
-                  )}
-                  {result.megaBonus && <Typography>MegaBonus!</Typography>}
                 </Box>
               </Paper>
             </Grow>

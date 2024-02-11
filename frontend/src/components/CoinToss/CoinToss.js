@@ -17,27 +17,23 @@ import { tossCoin } from "../../actions/coin";
 const CoinToss = () => {
   const [wager, setWager] = useState(0);
   const [heads, setHeads] = useState(true);
+  const [invalidWager, setInvalidWager] = useState(false);
   const [maxWagerExceeded, setMaxWagerExceeded] = useState(false);
   const playerTokens = useSelector((state) => state.tokens);
-  //   const [maxWager, setMaxWager] = useState(playerTokens);
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getTokens());
-  // }, [dispatch]);
+  useEffect(() => {
+    setMaxWagerExceeded(wager > playerTokens);
+  }, [wager, playerTokens]);
 
   useEffect(() => {
-    if (wager > playerTokens) {
-      setMaxWagerExceeded(true);
-    } else {
-      setMaxWagerExceeded(false);
-    }
-  }, [wager, playerTokens]);
+    setInvalidWager(wager !== "" && (isNaN(wager) || wager < 0));
+  }, [wager]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (maxWagerExceeded) {
+    if (maxWagerExceeded || invalidWager || wager === 0) {
       return;
     }
     const choice = heads ? "heads" : "tails";
@@ -45,7 +41,8 @@ const CoinToss = () => {
   };
 
   const handleWagerChange = (e) => {
-    const wagerAmount = parseInt(e.target.value, 10);
+    const wagerAmount =
+      e.target.value === "" ? 0 : parseInt(e.target.value, 10);
     setWager(wagerAmount);
   };
 
@@ -56,13 +53,18 @@ const CoinToss = () => {
           <Box component="form" sx={styles.form} onSubmit={handleSubmit}>
             <TextField
               id="wager-input"
-              error={maxWagerExceeded}
+              error={maxWagerExceeded || invalidWager}
               name="wager"
               label="Wager"
               onChange={handleWagerChange}
               autoFocus
-              required
-              helperText={maxWagerExceeded && `Max Wager: ${playerTokens}`}
+              helperText={
+                maxWagerExceeded
+                  ? `Max Wager: ${playerTokens}`
+                  : invalidWager
+                  ? "Invalid Wager"
+                  : ""
+              }
             />
             <RadioGroup
               row

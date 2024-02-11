@@ -3,6 +3,10 @@ import { Container, Grid, Grow, Paper, Typography } from "@mui/material";
 import { styles } from "./styles";
 
 const MostRecentResult = ({ mostRecentResult }) => {
+  if (!mostRecentResult) {
+    return null;
+  }
+
   return (
     <Grow in>
       <Container component="main" maxWidth="sm">
@@ -26,7 +30,7 @@ const MostRecentResult = ({ mostRecentResult }) => {
             )}
             {mostRecentResult.megaBonus && (
               <Container sx={styles.bonusContainer}>
-                <Typography>MegaBonus!</Typography>
+                <Typography sx={styles.megaBonusHeader}>MEGA BONUS!</Typography>
                 <Typography>This was your 5th win in a row!</Typography>
               </Container>
             )}
@@ -51,7 +55,15 @@ const MostRecentResult = ({ mostRecentResult }) => {
                 You wagered {mostRecentResult.wager} tokens
               </Typography>
 
-              {mostRecentResult.win ? (
+              {mostRecentResult.megaBonus ? (
+                <Typography>
+                  You won {mostRecentResult.wager * 10} tokens!
+                </Typography>
+              ) : mostRecentResult.bonus ? (
+                <Typography>
+                  You won {mostRecentResult.wager * 3} tokens!
+                </Typography>
+              ) : mostRecentResult.win ? (
                 <Typography>
                   You won {mostRecentResult.wager * 2} tokens
                 </Typography>

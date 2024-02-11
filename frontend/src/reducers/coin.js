@@ -1,4 +1,4 @@
-import { TOSS_COIN } from "../constants/actionTypes";
+import { TOSS_COIN, CLEAR_TOSS_HISTORY } from "../constants/actionTypes";
 
 const initialState = {
   history: [],
@@ -10,6 +10,11 @@ const coinReducer = (state = initialState, action) => {
       return {
         ...state,
         history: [...action.data],
+      };
+    case CLEAR_TOSS_HISTORY:
+      return {
+        ...state,
+        history: [],
       };
     default:
       return state;

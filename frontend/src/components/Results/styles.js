@@ -26,7 +26,16 @@ export const styles = {
   bonusHeader: {
     textAlign: "center",
     typography: "h6",
-    color: deepPurple[500],
+    fontWeight: "bold",
+    fontSize: "1.8rem",
+    color: "gold",
+  },
+  megaBonusHeader: {
+    textAlign: "center",
+    typography: "h6",
+    fontWeight: "bold",
+    fontSize: "2.4rem",
+    color: "gold",
   },
   amountsContainer: {
     textAlign: "center",

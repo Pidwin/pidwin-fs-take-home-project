@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
 const login = async (req, res) => {
+  console.log("Login has been triggered.");
   const { email, password } = req.body;
 
   try {
@@ -11,6 +12,10 @@ const login = async (req, res) => {
     if (!existingUser) {
       return res.status(404).json({ message: "User Does Not Exist" });
     }
+
+    existingUser.coinTosses = [];
+    existingUser.streak = 0;
+    await existingUser.save();
 
     const isPasswordCorrect = await bcrypt.compare(
       password,

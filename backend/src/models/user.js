@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema({
       result: { type: String },
     },
   ],
+  streak: { type: Number, default: 0 },
 });
 
 export default mongoose.model("User", userSchema);
