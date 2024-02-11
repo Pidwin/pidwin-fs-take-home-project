@@ -12,6 +12,10 @@ const login = async (req, res) => {
       return res.status(404).json({ message: "User Does Not Exist" });
     }
 
+    existingUser.coinTosses = [];
+    existingUser.streak = 0;
+    await existingUser.save();
+
     const isPasswordCorrect = await bcrypt.compare(
       password,
       existingUser.password
@@ -32,7 +36,7 @@ const login = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, playerTokens: existingUser.tokens });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }

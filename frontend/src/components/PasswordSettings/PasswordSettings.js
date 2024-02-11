@@ -19,7 +19,7 @@ const PasswordSetting = () => {
   const user = localStorage.getItem("profile")
     ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
     : "null";
-  const isSingedIn = user;
+  const isSignedIn = user;
   const history = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [changeFormData, setChangeFormData] = useState({
@@ -43,12 +43,12 @@ const PasswordSetting = () => {
   };
 
   useEffect(() => {
-    if (isSingedIn == "null" || isSingedIn === null) {
+    if (isSignedIn === "null" || isSignedIn === null) {
       history("/");
     }
   }, []);
 
-  if (isSingedIn !== "null" && isSingedIn !== null) {
+  if (isSignedIn !== "null" && isSignedIn !== null) {
     return (
       <div>
         <Container component="main" maxWidth="xs">
@@ -67,7 +67,8 @@ const PasswordSetting = () => {
                   sx={styles.typo}
                   align="left"
                 >
-                  To change your password, enter your current password and your new password.
+                  To change your password, enter your current password and your
+                  new password.
                 </Typography>
                 <Input
                   name="oldPassword"
