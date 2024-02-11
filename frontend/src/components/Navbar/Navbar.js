@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Typography, Toolbar, Avatar, Button } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Typography,
+  Toolbar,
+  Avatar,
+  Button,
+} from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
@@ -8,11 +15,19 @@ import { styles } from "./styles";
 import PlayerTokens from "../PlayerTokens/PlayerTokens";
 
 const Navbar = () => {
-  const [user, setUser] = useState(
-    localStorage.getItem("profile")
-      ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-      : "null"
-  );
+  const getTokenDecoded = () => {
+    const storedProfile = localStorage.getItem("profile");
+    if (storedProfile) {
+      const { token } = JSON.parse(storedProfile);
+      if (token && typeof token === "string") {
+        return jwtDecode(token);
+      }
+    }
+    return null;
+  };
+
+  const [user, setUser] = useState(getTokenDecoded());
+  const isLoggedIn = user !== "null" && user !== null;
 
   const dispatch = useDispatch();
   let location = useLocation();
@@ -25,14 +40,10 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (user !== "null" && user !== null) {
+    if (isLoggedIn) {
       if (user.exp * 1000 < new Date().getTime()) logout();
     }
-    setUser(
-      localStorage.getItem("profile")
-        ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-        : "null"
-    );
+    setUser(getTokenDecoded());
   }, [location]);
 
   return (
@@ -48,36 +59,48 @@ const Navbar = () => {
           CoinToss
         </Typography>
       </div>
+      {isLoggedIn && (
+        <Box sx={styles.tokensContainer}>
+          <PlayerTokens />
+        </Box>
+      )}
       <Toolbar sx={styles.toolbar}>
-        {user !== "null" && user !== null ? (
-          <>
-            <PlayerTokens />
-            <div sx={styles.profile}>
+        {isLoggedIn ? (
+          <Box sx={styles.profile}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
               <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
                 {user.name.charAt(0)}
               </Avatar>
               <Typography sx={styles.userName} variant="h6">
                 {user.name}
               </Typography>
-              <Button
-                variant="contained"
-                sx={styles.logout}
-                color="secondary"
-                onClick={logout}
-              >
-                Logout
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => {
-                  history("/password");
-                }}
-              >
-                Set Password
-              </Button>
-            </div>
-          </>
+            </Box>
+            <Button
+              variant="contained"
+              sx={styles.logout}
+              color="secondary"
+              onClick={logout}
+            >
+              Logout
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                history("/password");
+              }}
+            >
+              Set Password
+            </Button>
+          </Box>
         ) : (
           <Button
             component={Link}
