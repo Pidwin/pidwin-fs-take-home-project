@@ -10,15 +10,16 @@ const Results = () => {
   const mostRecentResult = coinState.history[coinState.history.length - 1];
 
   return (
-    // <Grow in>
-    <Container component="main" maxWidth="md">
-      {coinState.history.length > 0 && (
-        <>
-          <MostRecentResult mostRecentResult={mostRecentResult} />
-          <FullHistory history={coinState.history} />
-        </>
-      )}
-    </Container>
+    <Grow in>
+      <Container component="main" maxWidth="md" sx={styles.resultsContainer}>
+        {coinState.history.length > 0 && (
+          <>
+            <MostRecentResult mostRecentResult={mostRecentResult} />
+            <FullHistory history={coinState.history} />
+          </>
+        )}
+      </Container>
+    </Grow>
   );
 };
 

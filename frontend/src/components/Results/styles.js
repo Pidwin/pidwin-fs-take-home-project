@@ -2,6 +2,20 @@ import { theme } from "../../themes/Default";
 import { deepPurple } from "@mui/material/colors";
 
 export const styles = {
+  resultsContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "2rem",
+  },
+  mostRecentResultsContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "2rem",
+  },
   resultsHeader: {
     textAlign: "center",
     typography: "h4",

@@ -11,7 +11,7 @@ const MostRecentResult = ({ mostRecentResult }) => {
     <Grow in>
       <Container component="main" maxWidth="sm">
         <Paper elevation={3}>
-          <Container>
+          <Container sx={styles.mostRecentResultsContainer}>
             <Typography
               sx={[
                 styles.resultsHeader,
@@ -20,11 +20,11 @@ const MostRecentResult = ({ mostRecentResult }) => {
                 },
               ]}
             >
-              {mostRecentResult.win ? "You win!" : "You lose!"}
+              {mostRecentResult.win ? "WIN" : "LOSS"}
             </Typography>
             {mostRecentResult.bonus && (
               <Container sx={styles.bonusContainer}>
-                <Typography sx={styles.bonusHeader}>Bonus!</Typography>
+                <Typography sx={styles.bonusHeader}>BONUS!</Typography>
                 <Typography>This was your 3rd win in a row!</Typography>
               </Container>
             )}

@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Typography, Toolbar, Avatar, Button } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Typography,
+  Toolbar,
+  Avatar,
+  Button,
+} from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
@@ -18,7 +25,9 @@ const Navbar = () => {
     }
     return null;
   };
+
   const [user, setUser] = useState(getTokenDecoded());
+  const isLoggedIn = user !== "null" && user !== null;
 
   const dispatch = useDispatch();
   let location = useLocation();
@@ -31,7 +40,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (user !== "null" && user !== null) {
+    if (isLoggedIn) {
       if (user.exp * 1000 < new Date().getTime()) logout();
     }
     setUser(getTokenDecoded());
@@ -50,10 +59,14 @@ const Navbar = () => {
           CoinToss
         </Typography>
       </div>
+      {isLoggedIn && (
+        <Box sx={styles.tokensContainer}>
+          <PlayerTokens />
+        </Box>
+      )}
       <Toolbar sx={styles.toolbar}>
-        {user !== "null" && user !== null ? (
+        {isLoggedIn ? (
           <>
-            <PlayerTokens />
             <div sx={styles.profile}>
               <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
                 {user.name.charAt(0)}

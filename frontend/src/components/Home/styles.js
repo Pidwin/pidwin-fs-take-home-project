@@ -33,6 +33,13 @@ export const styles = {
     display: "flex",
     alignItems: "center",
   },
+  centerConsole: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "2rem",
+  },
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],

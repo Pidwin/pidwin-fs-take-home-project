@@ -3,6 +3,7 @@ import { Container, Grow, Paper, Typography } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
 import CoinToss from "../CoinToss/CoinToss";
 import Results from "../Results/Results";
+import { styles } from "./styles";
 
 const Home = () => {
   const user = localStorage.getItem("profile")
@@ -17,7 +18,7 @@ const Home = () => {
         <Container component="main" maxWidth="sm">
           <Paper elevation={3}>
             {isLoggedIn ? (
-              <Container>
+              <Container sx={styles.centerConsole}>
                 <Typography variant="h4" align="center" color="primary">
                   {`Welcome ${user.name}`}
                 </Typography>

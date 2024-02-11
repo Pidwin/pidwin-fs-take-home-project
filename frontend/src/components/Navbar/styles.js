@@ -19,7 +19,7 @@ export const styles = {
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
-    width: "1000px",
+    // width: "1000px",
   },
   profile: {
     display: "flex",
@@ -33,6 +33,12 @@ export const styles = {
   brandContainer: {
     display: "flex",
     alignItems: "center",
+  },
+  tokensContainer: {
+    display: "flex",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
