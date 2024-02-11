@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Grow, Paper, Typography } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
 import CoinToss from "../CoinToss/CoinToss";
-import MostRecentToss from "../MostRecentToss/MostRecentToss";
+import Results from "../Results/Results";
 
 const Home = () => {
   const user = localStorage.getItem("profile")
@@ -10,26 +10,29 @@ const Home = () => {
     : "null";
   const isSignedIn = user;
 
+  const isLoggedIn = isSignedIn !== "null" || isSignedIn !== null;
   return (
-    <Grow in>
-      <Container component="main" maxWidth="sm">
-        <Paper elevation={3}>
-          {isSignedIn !== "null" && isSignedIn !== null ? (
-            <Container>
+    <>
+      <Grow in>
+        <Container component="main" maxWidth="sm">
+          <Paper elevation={3}>
+            {isLoggedIn ? (
+              <Container>
+                <Typography variant="h4" align="center" color="primary">
+                  {`Welcome ${user.name}`}
+                </Typography>
+                <CoinToss />
+              </Container>
+            ) : (
               <Typography variant="h4" align="center" color="primary">
-                {`Welcome ${user.name}`}
+                Login to Play
               </Typography>
-              <CoinToss />
-              <MostRecentToss />
-            </Container>
-          ) : (
-            <Typography variant="h4" align="center" color="primary">
-              Login to Play
-            </Typography>
-          )}
-        </Paper>
-      </Container>
-    </Grow>
+            )}
+          </Paper>
+        </Container>
+      </Grow>
+      {isSignedIn && <Results />}
+    </>
   );
 };
 
