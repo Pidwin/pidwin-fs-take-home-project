@@ -1,8 +1,7 @@
 import { TOSS_COIN } from "../constants/actionTypes";
 
 const initialState = {
-  result: null,
-  newTokens: 0,
+  history: [],
 };
 
 const coinReducer = (state = initialState, action) => {
@@ -10,8 +9,7 @@ const coinReducer = (state = initialState, action) => {
     case TOSS_COIN:
       return {
         ...state,
-        result: action.payload.result,
-        newTokens: action.payload.newTokens,
+        history: [...action.data],
       };
     default:
       return state;

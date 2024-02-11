@@ -33,12 +33,23 @@ export const tossCoin = async (req, res) => {
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { tokens: newTokens },
+      {
+        tokens: newTokens,
+        $push: {
+          coinTosses: {
+            $each: [{ win: result === choice, wager, guess: choice, result }],
+            $slice: -10,
+          },
+        },
+      },
       { new: true }
     );
     console.log("updatedUser: ", updatedUser);
 
-    res.status(200).json({ result, newTokens: updatedUser.tokens });
+    res.status(200).json({
+      tokens: updatedUser.tokens,
+      history: updatedUser.coinTosses,
+    });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }

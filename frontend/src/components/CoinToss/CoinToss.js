@@ -23,9 +23,9 @@ const CoinToss = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getTokens());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getTokens());
+  // }, [dispatch]);
 
   useEffect(() => {
     if (wager > playerTokens) {

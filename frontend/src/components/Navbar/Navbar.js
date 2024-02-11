@@ -8,11 +8,17 @@ import { styles } from "./styles";
 import PlayerTokens from "../PlayerTokens/PlayerTokens";
 
 const Navbar = () => {
-  const [user, setUser] = useState(
-    localStorage.getItem("profile")
-      ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-      : "null"
-  );
+  const getTokenDecoded = () => {
+    const storedProfile = localStorage.getItem("profile");
+    if (storedProfile) {
+      const { token } = JSON.parse(storedProfile);
+      if (token && typeof token === "string") {
+        return jwtDecode(token);
+      }
+    }
+    return null;
+  };
+  const [user, setUser] = useState(getTokenDecoded());
 
   const dispatch = useDispatch();
   let location = useLocation();
@@ -28,11 +34,7 @@ const Navbar = () => {
     if (user !== "null" && user !== null) {
       if (user.exp * 1000 < new Date().getTime()) logout();
     }
-    setUser(
-      localStorage.getItem("profile")
-        ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-        : "null"
-    );
+    setUser(getTokenDecoded());
   }, [location]);
 
   return (
