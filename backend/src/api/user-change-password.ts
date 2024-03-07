@@ -1,17 +1,18 @@
 import bcrypt from "bcryptjs";
-import User from "../models/user.js";
+import { RequestHandler } from "express";
+import { UserModel } from "../models/user";
 
-const changePassword = async (req, res) => {
+const changePassword: RequestHandler = async (req, res) => {
   const { email, oldPassword, newPassword } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModel.findOne({ email });
 
     if (!existingUser) {
       return res.status(404).json({ message: "User Does Not Exist" });
     }
 
-    if (!req.userId) {
+    if (!req.params.userId) {
       return res.json({ message: "Unauthenticated" });
     }
 
@@ -25,7 +26,7 @@ const changePassword = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 12);
-    const updatePassword = await User.findByIdAndUpdate(
+    const updatePassword = await UserModel.findByIdAndUpdate(
       existingUser._id,
       { password: hashedPassword },
       { new: true }

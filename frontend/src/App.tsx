@@ -1,13 +1,12 @@
-import React from "react";
 import { Container } from "@mui/material";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Navbar from "./components/Navbar/Navbar";
-import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import Navbar from "./components/Navbar/Navbar";
 import PasswordSetting from "./components/PasswordSettings/PasswordSettings";
 
 const App = () => {
@@ -27,9 +26,9 @@ const App = () => {
           pauseOnHover
         />
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/auth" element={<Login />} />
-          <Route exact path="/password" element={<PasswordSetting />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Login />} />
+          <Route path="/password" element={<PasswordSetting />} />
         </Routes>
       </Container>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import LockIcon from "@mui/icons-material/LockOutlined";
 import {
   Avatar,
   Button,
@@ -7,55 +7,54 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import Input from "./Input";
-import { jwtDecode } from "jwt-decode";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signup, login } from "../../actions/login";
-import LockIcon from "@mui/icons-material/LockOutlined";
+import { ISignupInput } from "shared/interfaces";
+import { useAppDispatch } from "../..";
+import { login, signup } from "../../actions/login";
+import { getUser } from "../../utils/local-storage";
+import Input from "./Input";
 import { styles } from "./styles";
 
-const formDataInitVal = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
-
 const Login = () => {
-  const [formData, setFormData] = useState(formDataInitVal);
+  const [formData, setFormData] = useState<ISignupInput>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const user = localStorage.getItem("profile")
-    ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-    : "null";
+  const user = getUser();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isLoggedIn) {
-      dispatch(login(formData, history));
+      dispatch(login({ input: formData, history }));
     } else {
-      dispatch(signup(formData, history));
+      dispatch(signup({ input: formData, history }));
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleShowPassword = (e) => {
+  const handleShowPassword = () => {
     setShowPassword((prevPassword) => !prevPassword);
   };
 
-  const switchLogin = (e) => {
+  const switchLogin = () => {
     setIsLoggedIn((prevState) => !prevState);
   };
 
-  if (user !== "null" && user !== null) {
+  if (user !== null) {
     history("/");
     return null;
   } else {
@@ -70,7 +69,7 @@ const Login = () => {
             <Typography variant="h5" color="primary">
               {isLoggedIn ? "Login" : "Logout"}
             </Typography>
-            <form sx={styles.form} onSubmit={handleSubmit}>
+            <form style={styles.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 {!isLoggedIn && (
                   <>
@@ -103,8 +102,6 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   handleShowPassword={handleShowPassword}
                   half={isLoggedIn ? false : true}
-                  showBar={isLoggedIn ? false : true}
-                  passValue={formData.password}
                 />
                 {!isLoggedIn && (
                   <>

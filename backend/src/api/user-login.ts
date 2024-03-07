@@ -1,12 +1,13 @@
 import bcrypt from "bcryptjs";
+import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
-import User from "../models/user.js";
+import { UserModel } from "../models/user";
 
-const login = async (req, res) => {
+const login: RequestHandler = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModel.findOne({ email });
 
     if (!existingUser) {
       return res.status(404).json({ message: "User Does Not Exist" });

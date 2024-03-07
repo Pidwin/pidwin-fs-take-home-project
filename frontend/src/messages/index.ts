@@ -1,7 +1,6 @@
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContent, toast } from "react-toastify";
 
-export const success = (message) =>
+export const success = (message: ToastContent) =>
   toast.success(message, {
     position: "bottom-left",
     autoClose: 3000,
@@ -12,7 +11,7 @@ export const success = (message) =>
     progress: undefined,
   });
 
-export const error = (message) =>
+export const error = (message: ToastContent) =>
   toast.error(message, {
     position: "bottom-left",
     autoClose: 3000,
@@ -23,7 +22,7 @@ export const error = (message) =>
     progress: undefined,
   });
 
-export const warning = (message) =>
+export const warning = (message: ToastContent) =>
   toast.warning(message, {
     position: "bottom-left",
     autoClose: 3000,
@@ -34,7 +33,7 @@ export const warning = (message) =>
     progress: undefined,
   });
 
-export const info = (message) =>
+export const info = (message: ToastContent) =>
   toast(message, {
     position: "bottom-left",
     autoClose: 3000,

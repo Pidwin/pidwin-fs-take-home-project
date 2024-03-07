@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import LockIcon from "@mui/icons-material/LockRounded";
 import {
   Avatar,
   Button,
@@ -7,48 +7,49 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../..";
+import { changePassword } from "../../actions/login";
+import { getUser } from "../../utils/local-storage";
 import Input from "../Login/Input";
 import { styles } from "./styles";
-import LockIcon from "@mui/icons-material/LockRounded";
-import { changePassword } from "../../actions/login";
-import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { IChangePasswordInput } from "shared/interfaces";
 
 const PasswordSetting = () => {
-  const user = localStorage.getItem("profile")
-    ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-    : "null";
-  const isSingedIn = user;
+  const user = getUser();
+  const isSignedIn = user;
   const history = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [changeFormData, setChangeFormData] = useState({
+  const [changeFormData, setChangeFormData] = useState<IChangePasswordInput>({
     oldPassword: "",
     newPassword: "",
-    email: user.email,
+    email: user?.email ?? "",
   });
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const handleChangeC = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setChangeFormData({ ...changeFormData, [e.target.name]: e.target.value });
   };
 
-  const handleShowPassword = (e) => {
+  const handleShowPassword = () => {
     setShowPassword((prevPassword) => !prevPassword);
   };
 
-  const handleSubmitChange = (e) => {
+  const handleSubmitChange = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(changePassword(changeFormData, history));
+    dispatch(changePassword({ input: changeFormData, history }));
   };
 
   useEffect(() => {
-    if (isSingedIn == "null" || isSingedIn === null) {
+    if (isSignedIn == null) {
       history("/");
     }
   }, []);
 
-  if (isSingedIn !== "null" && isSingedIn !== null) {
+  if (isSignedIn !== null) {
     return (
       <div>
         <Container component="main" maxWidth="xs">
@@ -59,7 +60,7 @@ const PasswordSetting = () => {
             <Typography variant="h5" color="primary">
               Set Password
             </Typography>
-            <form sx={styles.form} onSubmit={handleSubmitChange}>
+            <form style={styles.form} onSubmit={handleSubmitChange}>
               <Grid container spacing={2}>
                 <Typography
                   variant="caption"
@@ -67,22 +68,21 @@ const PasswordSetting = () => {
                   sx={styles.typo}
                   align="left"
                 >
-                  To change your password, enter your current password and your new password.
+                  To change your password, enter your current password and your
+                  new password.
                 </Typography>
                 <Input
                   name="oldPassword"
                   label="Current Password"
-                  handleChange={handleChangeC}
+                  handleChange={handleChange}
                   type={showPassword ? "text" : "password"}
                   handleShowPassword={handleShowPassword}
                 />
                 <Input
                   name="newPassword"
                   label="New Password"
-                  handleChange={handleChangeC}
+                  handleChange={handleChange}
                   type="password"
-                  showBar={true}
-                  passValue={changeFormData.newPassword}
                 />
                 <Button
                   type="submit"
