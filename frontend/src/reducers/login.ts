@@ -1,5 +1,5 @@
-import { ILoginResponse } from "@pidwin/shared";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { LoginResponse } from "shared/interfaces";
 
 interface ILoginState {
   token: string | null;
@@ -11,7 +11,7 @@ const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-    LOGIN(state, action: PayloadAction<ILoginResponse>) {
+    LOGIN(state, action: PayloadAction<LoginResponse>) {
       localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
       state = { ...state, ...action.payload };
     },

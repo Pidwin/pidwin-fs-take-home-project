@@ -13,7 +13,7 @@ const changePassword: RequestHandler = async (req, res) => {
     }
 
     if (!req.params.userId) {
-      return res.json({ message: "Unauthenticated" });
+      return res.status(401).json({ message: "Unauthenticated" });
     }
 
     const isPasswordCorrect = await bcrypt.compare(

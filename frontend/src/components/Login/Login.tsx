@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ISignupInput } from "shared/interfaces";
+import { SignupInput } from "shared/interfaces";
 import { useAppDispatch } from "../..";
 import { login, signup } from "../../actions/login";
 import { getUser } from "../../utils/local-storage";
@@ -17,7 +17,7 @@ import Input from "./Input";
 import { styles } from "./styles";
 
 const Login = () => {
-  const [formData, setFormData] = useState<ISignupInput>({
+  const [formData, setFormData] = useState<SignupInput>({
     firstName: "",
     lastName: "",
     email: "",

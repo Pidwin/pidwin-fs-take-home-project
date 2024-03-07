@@ -14,14 +14,14 @@ import { changePassword } from "../../actions/login";
 import { getUser } from "../../utils/local-storage";
 import Input from "../Login/Input";
 import { styles } from "./styles";
-import { IChangePasswordInput } from "shared/interfaces";
+import { ChangePasswordInput } from "shared/interfaces";
 
 const PasswordSetting = () => {
   const user = getUser();
   const isSignedIn = user;
   const history = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [changeFormData, setChangeFormData] = useState<IChangePasswordInput>({
+  const [changeFormData, setChangeFormData] = useState<ChangePasswordInput>({
     oldPassword: "",
     newPassword: "",
     email: user?.email ?? "",

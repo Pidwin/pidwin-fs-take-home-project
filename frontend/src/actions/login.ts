@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { NavigateFunction } from "react-router-dom";
 import {
-  IChangePasswordInput,
-  ILoginInput,
-  ISignupInput,
+  ChangePasswordInput,
+  LoginInput,
+  SignupInput,
 } from "shared/interfaces";
 import * as api from "../api";
 import * as messages from "../messages";
@@ -16,7 +16,7 @@ import { LOGIN, LOGOUT } from "../reducers/login";
 export const signup = createAsyncThunk(
   "login/loginAttempt",
   async (
-    thunkArg: { input: ISignupInput; history: NavigateFunction },
+    thunkArg: { input: SignupInput; history: NavigateFunction },
     thunkAPI
   ) => {
     try {
@@ -39,7 +39,7 @@ export const signup = createAsyncThunk(
 export const login = createAsyncThunk(
   "login/loginAttempt",
   async (
-    thunkArg: { input: ILoginInput; history: NavigateFunction },
+    thunkArg: { input: LoginInput; history: NavigateFunction },
     thunkAPI
   ) => {
     try {
@@ -62,7 +62,7 @@ export const login = createAsyncThunk(
 export const changePassword = createAsyncThunk(
   "login/changePassword",
   async (
-    thunkArg: { input: IChangePasswordInput; history: NavigateFunction },
+    thunkArg: { input: ChangePasswordInput; history: NavigateFunction },
     thunkAPI
   ) => {
     try {

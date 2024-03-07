@@ -8,7 +8,7 @@ const fetchGame: RequestHandler = async (req, res) => {
   try {
     // Verify that the user has been authenticated.
     if (!req.params.userId) {
-      return res.json({ message: "Unauthenticated" });
+      return res.status(401).json({ message: "Unauthenticated" });
     }
 
     // Find and return the user's current game state.

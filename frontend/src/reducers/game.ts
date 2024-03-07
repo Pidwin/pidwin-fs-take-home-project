@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IGameFetchResponse } from "shared/interfaces";
+import { GameFetchResponse } from "shared/interfaces";
 
-type GameState = IGameFetchResponse | null;
+type GameState = GameFetchResponse | null;
 
 const initialState: GameState = null as GameState;
 
@@ -9,7 +9,7 @@ const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    FETCH(state, action: PayloadAction<IGameFetchResponse>) {
+    FETCH(state, action: PayloadAction<GameFetchResponse>) {
       const newState = state ? { ...state, ...action.payload } : action.payload;
       return newState;
     },

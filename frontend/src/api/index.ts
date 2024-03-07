@@ -1,8 +1,9 @@
 import axios from "axios";
 import {
-  IChangePasswordInput,
-  ILoginInput,
-  ISignupInput,
+  ChangePasswordInput,
+  GameWagerInput,
+  LoginInput,
+  SignupInput,
 } from "shared/interfaces";
 
 const API = axios.create({ baseURL: "http://localhost:5000" });
@@ -14,9 +15,11 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const login = (input: ILoginInput) => API.post("/api/user/login", input);
-export const signup = (input: ISignupInput) =>
+export const login = (input: LoginInput) => API.post("/api/user/login", input);
+export const signup = (input: SignupInput) =>
   API.post("/api/user/signup", input);
-export const changePassword = (input: IChangePasswordInput) =>
+export const changePassword = (input: ChangePasswordInput) =>
   API.post("/api/user/changePassword", input);
 export const fetchGame = () => API.get("/api/game/fetch");
+export const wager = (input: GameWagerInput) =>
+  API.post("/api/game/wager", input);
