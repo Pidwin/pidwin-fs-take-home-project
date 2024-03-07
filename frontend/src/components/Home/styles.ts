@@ -37,8 +37,12 @@ export const styles = {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
   },
-  gameBox: {
-    padding: "30px"
+  wagerFormPaper: {
+    padding: "30px",
+  },
+  wagerListPaper: {
+    padding: "30px",
+    marginTop: "20px",
   },
   wagerForm: {
     padding: "30px 20px 10px 20px",
@@ -49,7 +53,14 @@ export const styles = {
     margin: "30px 0px 30px 0px",
   },
   wagerSubmitButton: {
-    width: "100px",
     alignSelf: "center",
+  },
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    marginBottom: "50px",
+    width: "100%",
   },
 };

@@ -1,8 +1,11 @@
+import { IWager } from "./user";
+
 /**
  * The shape of the response to a successful login request.
  */
 export type GameFetchResponse = {
   numTokens: number;
+  lastTenWagers: IWager[];
 };
 
 /**
@@ -10,9 +13,9 @@ export type GameFetchResponse = {
  */
 export type GameWagerInput = {
   /**
-   * The side the user made their wager on (0 = head, 1 = tails).
+   * Whether the user wagered on heads (otherwise tails).
    */
-  sideWagered: 0 | 1;
+  wageredHeads: boolean;
 
   /**
    * The number of tokens the user risked on the wager.

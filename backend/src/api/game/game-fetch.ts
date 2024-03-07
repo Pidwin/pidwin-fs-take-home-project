@@ -16,7 +16,10 @@ const fetchGame: RequestHandler = async (req, res) => {
     if (!existingUser) {
       return res.status(404).json({ message: "User Does Not Exist" });
     }
-    res.status(200).json({ numTokens: existingUser.numTokens });
+    res.status(200).json({
+      numTokens: existingUser.numTokens,
+      lastTenWagers: existingUser.lastTenWagers,
+    });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }

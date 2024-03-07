@@ -1,8 +1,9 @@
 import { RequestHandler } from "express";
 import { UserModel } from "../../models/user";
+import { IWager } from "shared/interfaces";
 
 const wager: RequestHandler = async (req, res) => {
-  const { sideWagered, tokensWagered } = req.body;
+  const { wageredHeads, tokensWagered } = req.body;
 
   try {
     // Verify that the user has been authenticated.
@@ -30,17 +31,40 @@ const wager: RequestHandler = async (req, res) => {
     }
 
     // Determine the result of the wager.
-    const flipResult = Math.round(Math.random());
-    const wagerWon = flipResult === sideWagered;
-    let result = user.numTokens - tokensWagered;
+    const landedHeads = Math.random() < 0.5;
+    const wagerWon = landedHeads === wageredHeads;
+
+    // Calculate the user's new game state.
+    let winStreak = wagerWon ? user.winStreak + 1 : 0;
+    let numTokens = user.numTokens - tokensWagered;
+    let bonusAwarded = false;
     if (wagerWon) {
-      result += tokensWagered * 2;
+      let multiplier = 2;
+      if (winStreak === 3) {
+        multiplier = 3;
+        bonusAwarded = true;
+      } else if (winStreak === 5) {
+        multiplier = 10;
+        winStreak = 0;
+        bonusAwarded = true;
+      }
+      numTokens += tokensWagered * multiplier;
     }
+
+    const wagerResult: IWager = {
+      wageredHeads,
+      tokensWagered,
+      wagerWon,
+      netWin: numTokens - user.numTokens,
+      initialBalance: user.numTokens,
+      bonusAwarded,
+    };
+    let lastTenWagers = [...user.lastTenWagers, wagerResult].slice(-10);
 
     // Update the user's balance.
     const updateUser = await UserModel.findByIdAndUpdate(
       user._id,
-      { numTokens: result },
+      { numTokens, winStreak, lastTenWagers },
       { new: true }
     );
     if (!updateUser) {
@@ -49,7 +73,7 @@ const wager: RequestHandler = async (req, res) => {
       });
     }
 
-    res.status(200).json({ numTokens: updateUser.numTokens, wagerWon });
+    res.status(200).json({ numTokens: updateUser.numTokens, lastTenWagers });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }

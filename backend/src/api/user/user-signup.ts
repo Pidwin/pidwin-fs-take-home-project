@@ -22,6 +22,8 @@ const signup: RequestHandler = async (req, res) => {
       password: hashedPassword,
       name: `${firstName} ${lastName}`,
       numTokens: 100,
+      winStreak: 0,
+      lastTenWagers: [],
     });
     const token = jwt.sign(
       {

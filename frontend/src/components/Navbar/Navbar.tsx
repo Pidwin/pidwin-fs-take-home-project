@@ -52,7 +52,7 @@ const Navbar = () => {
       </Box>
       <Box sx={styles.tokenCountContainer}>
         {user !== null && (
-          <Typography color="primary" variant="h5" align="center">
+          <Typography color="primary" variant="h4" align="center">
             Tokens: {gameState?.numTokens}
           </Typography>
         )}
