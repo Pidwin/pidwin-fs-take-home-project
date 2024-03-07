@@ -3,10 +3,7 @@ import Lucky7Result from '../models/lucky7Result.js';
 
 const betOnLucky7 = async (req, res) => {
     const { areDiceLucky } = req.body; 
-    console.log("user betting on lucky7 game")
     try{
-        console.log("is user authenticated?")
-
         if (!req.userId) {
             return res.json({ message: "Unauthenticated" });
           }

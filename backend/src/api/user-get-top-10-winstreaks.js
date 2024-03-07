@@ -12,11 +12,8 @@ const winStreakArraySchema = z.array(winStreakSchema)
 
 const top10WinStreak = async (req,res) => {
 
-    try {
-        console.log("check if userId exists")
-        
+    try {        
       if (!req.userId) {
-        console.log("no user Id")
         return res.json({ message: "Unauthenticated" });
       }
       console.log(`userId: ${req.userId}`)
