@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "set-interval-async": "^3.0.3"
+  }
+}
