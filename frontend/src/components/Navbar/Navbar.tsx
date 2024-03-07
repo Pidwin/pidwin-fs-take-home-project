@@ -1,7 +1,16 @@
-import { AppBar, Avatar, Button, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../..";
+import { RootState } from "../../reducers";
 import { LOGOUT } from "../../reducers/login";
 import { getUser } from "../../utils/local-storage";
 import { styles } from "./styles";
@@ -11,6 +20,9 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   let location = useLocation();
   const history = useNavigate();
+  const gameState = useSelector((state: RootState) => {
+    return state.game;
+  });
 
   const logout = () => {
     dispatch(LOGOUT());
@@ -27,7 +39,7 @@ const Navbar = () => {
 
   return (
     <AppBar sx={styles.appBar} position="static" color="inherit">
-      <div style={styles.brandContainer}>
+      <Box style={styles.brandContainer}>
         <Typography
           component={Link}
           to="/"
@@ -37,10 +49,17 @@ const Navbar = () => {
         >
           CoinToss
         </Typography>
-      </div>
+      </Box>
+      <Box sx={styles.tokenCountContainer}>
+        {user !== null && (
+          <Typography color="primary" variant="h5" align="center">
+            Tokens: {gameState?.numTokens}
+          </Typography>
+        )}
+      </Box>
       <Toolbar sx={styles.toolbar}>
         {user !== null ? (
-          <div style={styles.profile}>
+          <Box sx={styles.profile}>
             <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
               {user.name.charAt(0)}
             </Avatar>
@@ -59,7 +78,7 @@ const Navbar = () => {
             >
               Set Password
             </Button>
-          </div>
+          </Box>
         ) : (
           <Button
             component={Link}

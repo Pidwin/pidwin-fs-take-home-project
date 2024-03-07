@@ -15,6 +15,9 @@ export class User implements IUser {
 
   @prop({ required: true })
   password: string;
+
+  @prop({ required: true })
+  numTokens: number;
 }
 
 export const UserModel = getModelForClass(User);

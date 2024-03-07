@@ -13,7 +13,7 @@ const auth: RequestHandler = async (req, res, next) => {
 
       if (typeof decodedData === "object") {
         req.params.userId = isCustomAuth ? decodedData?._id : decodedData?.sub;
-      } 
+      }
     }
 
     next();

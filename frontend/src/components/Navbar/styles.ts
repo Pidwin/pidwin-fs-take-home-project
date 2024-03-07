@@ -17,22 +17,28 @@ export const styles = {
     textDecoration: "none",
   },
   toolbar: {
+    flex: 1,
     display: "flex",
     justifyContent: "flex-end",
-    width: "1000px",
   },
   profile: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "space-between",
-    width: "600px",
   },
   userName: {
     display: "flex",
     alignItems: "center",
   },
   brandContainer: {
+    flex: 1,
     display: "flex",
     alignItems: "center",
+  },
+  tokenCountContainer: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
   },
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),

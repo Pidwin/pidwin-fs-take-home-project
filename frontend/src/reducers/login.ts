@@ -1,11 +1,11 @@
 import { ILoginResponse } from "@pidwin/shared";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface LoginState {
+interface ILoginState {
   token: string | null;
 }
 
-const initialState: LoginState = { token: null };
+const initialState: ILoginState = { token: null };
 
 const loginSlice = createSlice({
   name: "login",

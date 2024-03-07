@@ -19,3 +19,4 @@ export const signup = (input: ISignupInput) =>
   API.post("/api/user/signup", input);
 export const changePassword = (input: IChangePasswordInput) =>
   API.post("/api/user/changePassword", input);
+export const fetchGame = () => API.get("/api/game/fetch");

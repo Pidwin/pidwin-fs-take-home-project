@@ -1,5 +1,5 @@
 import express from "express";
-import auth from "../utils/auth";
+import auth from "../../utils/auth";
 import changePassword from "./user-change-password";
 import login from "./user-login";
 import signup from "./user-signup";

@@ -1,8 +1,16 @@
 import { Container, Grow, Paper, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { fetchGame } from "../../actions/game";
+import { useAppDispatch } from "../../index";
 import { getUser } from "../../utils/local-storage";
 
 const Home = () => {
   const user = getUser();
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchGame());
+  }, [user]);
 
   return (
     <Grow in>

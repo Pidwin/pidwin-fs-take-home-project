@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { RequestHandler } from "express";
-import { UserModel } from "../models/user";
+import { UserModel } from "../../models/user";
 
 const changePassword: RequestHandler = async (req, res) => {
   const { email, oldPassword, newPassword } = req.body;

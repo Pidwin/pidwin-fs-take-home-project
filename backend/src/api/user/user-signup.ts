@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
-import { UserModel } from "../models/user";
+import { UserModel } from "../../models/user";
 
 const signup: RequestHandler = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
@@ -21,6 +21,7 @@ const signup: RequestHandler = async (req, res) => {
       email,
       password: hashedPassword,
       name: `${firstName} ${lastName}`,
+      numTokens: 100,
     });
     const token = jwt.sign(
       {

@@ -10,6 +10,9 @@ import * as api from "../api";
 import * as messages from "../messages";
 import { LOGIN, LOGOUT } from "../reducers/login";
 
+/**
+ * Creates a user.
+ */
 export const signup = createAsyncThunk(
   "login/loginAttempt",
   async (
@@ -30,6 +33,9 @@ export const signup = createAsyncThunk(
   }
 );
 
+/**
+ * Logs a user in.
+ */
 export const login = createAsyncThunk(
   "login/loginAttempt",
   async (
@@ -50,6 +56,9 @@ export const login = createAsyncThunk(
   }
 );
 
+/**
+ * Changes a user's password.
+ */
 export const changePassword = createAsyncThunk(
   "login/changePassword",
   async (
