@@ -32,6 +32,8 @@ mongoose
   .catch((error) => console.log(error.message));
 
 
+  //server start, play the first game of lucky7
+  await lucky7Game()
   // run a game of lucky7 every 15 seconds.
   setIntervalAsync(async ()=> {
     await lucky7Game()

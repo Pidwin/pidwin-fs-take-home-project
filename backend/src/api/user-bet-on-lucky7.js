@@ -1,5 +1,5 @@
 import Lucky7Result from '../models/lucky7Result.js';
-
+import Bet from '../models/bet.js'
 
 const betOnLucky7 = async (req, res) => {
     const { areDiceLucky } = req.body; 
@@ -7,25 +7,25 @@ const betOnLucky7 = async (req, res) => {
         if (!req.userId) {
             return res.json({ message: "Unauthenticated" });
           }
-    
-        // let lucky;
-        // await Lucky7Result.watch().on('change', data => {
-        //     lucky = data.lucky
-        //     console.log(`lucky? ${data.lucky}`)
-        // })
-        
-        //get last game played 
 
 
-       let data =  await Lucky7Result.find().sort({ _id: -1 }).limit(1)
+        //only let user place bet if for the first 10 seconds after the last game.
+        const lastLucky7Result = await Lucky7Result.findOne().sort({createdAt: -1})
+        const seconds = Math.round(Math.abs(new Date().getTime() -lastLucky7Result.createdAt.getTime() )/1000)
 
-        if(areDiceLucky === data[0].lucky){
-            await res.status(200).json({message: `you win` })
-
-        }else { // players bet does not match the dice
-           await res.status(200).json({message: `you lose` })
+        if(seconds<=10){
+             //place users bet
+            await Bet.create({
+                userId:req.userId,
+                areDiceLucky
+            })
+            //user should be informed that their bet has been placed.
+            await res.status(201).json({message: `your bet has been placed` })
+        }else{ // more then 
+            await res.status(425).json({message: `You are to early. Please wait ${Math.abs(15-seconds)} seconds to play` })
 
         }
+    
 
     } catch (error) {
         res.status(500).json({ message: "Something went wrong" });
