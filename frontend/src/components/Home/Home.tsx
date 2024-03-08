@@ -53,7 +53,10 @@ const Home = () => {
   const handleWagerChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, tokensWagered: parseInt(event.target.value) });
+    const newValue = parseInt(event.target.value);
+    if (newValue > 0) {
+      setFormData({ ...formData, tokensWagered: parseInt(event.target.value) });
+    }
   };
 
   /**
@@ -102,6 +105,11 @@ const Home = () => {
                   type="number"
                   value={formData.tokensWagered}
                   onChange={handleWagerChange}
+                  inputProps={{
+                    inputProps: {
+                      min: 1,
+                    },
+                  }}
                 />
                 <RadioGroup
                   value={formData.wageredHeads}
