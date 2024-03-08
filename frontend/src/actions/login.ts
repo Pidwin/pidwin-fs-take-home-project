@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { NavigateFunction } from "react-router-dom";
 import {
   ChangePasswordInput,
   LoginInput,
+  LoginResponse,
   SignupInput,
 } from "shared/interfaces";
 import * as api from "../api";
@@ -21,8 +22,8 @@ export const signup = createAsyncThunk(
   ) => {
     try {
       const { input, history } = thunkArg;
-      const { data } = await api.signup(input);
-      thunkAPI.dispatch(LOGIN(data));
+      const result: AxiosResponse<LoginResponse> = await api.signup(input);
+      thunkAPI.dispatch(LOGIN(result.data));
       history("/");
       messages.success("Login Successful");
     } catch (error) {
@@ -44,8 +45,8 @@ export const login = createAsyncThunk(
   ) => {
     try {
       const { input, history } = thunkArg;
-      const { data } = await api.login(input);
-      thunkAPI.dispatch(LOGIN(data));
+      const result: AxiosResponse<LoginResponse> = await api.login(input);
+      thunkAPI.dispatch(LOGIN(result.data));
       history("/");
       messages.success("Login Successful");
     } catch (error) {
