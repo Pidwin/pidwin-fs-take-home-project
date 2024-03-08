@@ -20,5 +20,5 @@ export interface IWager {
   wageredHeads: boolean;
   wagerWon: boolean;
   netWin: number;
-  bonusAwarded: boolean;
+  bonusMultiplierAwarded: number | null;
 }

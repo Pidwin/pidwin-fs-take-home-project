@@ -31,8 +31,8 @@ export const wager = createAsyncThunk(
       const lastWager =
         result.data.lastTenWagers[result.data.lastTenWagers.length - 1];
       let messageText = `Wager ${lastWager.wagerWon ? "won!" : "lost."}`;
-      if (lastWager.bonusAwarded) {
-        messageText += " Bonus tokens awarded!";
+      if (lastWager.bonusMultiplierAwarded) {
+        messageText += ` ${lastWager.bonusMultiplierAwarded}x bonus payout awarded for your win streak!`;
       }
       messages.info(messageText);
     } catch (error) {

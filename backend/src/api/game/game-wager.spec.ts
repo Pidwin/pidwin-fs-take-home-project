@@ -1,7 +1,7 @@
 import { getModelForClass } from "@typegoose/typegoose";
-import request from "supertest";
 import { app } from "backend";
-import { IUser } from "shared/interfaces";
+import { GameFetchResponse, IUser } from "shared/interfaces";
+import request from "supertest";
 import * as random from "../../utils/rand";
 
 jest.mock("@typegoose/typegoose", () => {
@@ -60,7 +60,7 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };
@@ -90,7 +90,7 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };
@@ -122,12 +122,12 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };
 
-    const expectedResult = {
+    const expectedResult: GameFetchResponse = {
       numTokens: 101,
       lastTenWagers: [
         ...mockUser.lastTenWagers,
@@ -137,7 +137,7 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };
@@ -185,12 +185,12 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };
 
-    const expectedResult = {
+    const expectedResult: GameFetchResponse = {
       numTokens: 102,
       lastTenWagers: [
         ...mockUser.lastTenWagers,
@@ -200,7 +200,7 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 2,
-          bonusAwarded: true,
+          bonusMultiplierAwarded: 3,
         },
       ],
     };
@@ -248,12 +248,12 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };
 
-    const expectedResult = {
+    const expectedResult: GameFetchResponse = {
       numTokens: 109,
       lastTenWagers: [
         ...mockUser.lastTenWagers,
@@ -263,7 +263,7 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 9,
-          bonusAwarded: true,
+          bonusMultiplierAwarded: 10,
         },
       ],
     };
@@ -311,12 +311,12 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };
 
-    const expectedResult = {
+    const expectedResult: GameFetchResponse = {
       numTokens: 99,
       lastTenWagers: [
         ...mockUser.lastTenWagers,
@@ -326,7 +326,7 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: false,
           netWin: -1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };
@@ -374,12 +374,12 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: false,
         }),
       ],
     };
 
-    const expectedResult = {
+    const expectedResult: GameFetchResponse = {
       numTokens: 99,
       lastTenWagers: [
         ...mockUser.lastTenWagers.slice(1),
@@ -389,7 +389,7 @@ describe("game-wager", () => {
           wageredHeads: true,
           wagerWon: false,
           netWin: -1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };

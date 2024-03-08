@@ -1,5 +1,6 @@
 import { getModelForClass } from "@typegoose/typegoose";
 import { app } from "backend";
+import { IUser } from "shared/interfaces";
 import request from "supertest";
 
 jest.mock("@typegoose/typegoose", () => {
@@ -41,13 +42,13 @@ describe("fetchGame", () => {
 
   it("should fail if the user does not exist", async () => {
     // Create a mock user
-    const mockUser = {
+    const mockUser: IUser = {
       _id: "test",
       name: "Gabriel Diaz",
       email: "gabrield@yahoo.com",
       password: "password123",
-      numTokens: "100",
-      winStreak: "1",
+      numTokens: 100,
+      winStreak: 1,
       lastTenWagers: [
         {
           initialBalance: 100,
@@ -55,7 +56,7 @@ describe("fetchGame", () => {
           wageredHeads: true,
           wagerWon: true,
           netWin: 1,
-          bonusAwarded: false,
+          bonusMultiplierAwarded: null,
         },
       ],
     };

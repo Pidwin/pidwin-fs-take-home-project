@@ -41,16 +41,16 @@ const wager: RequestHandler = async (req, res) => {
     // Calculate the user's new game state.
     let winStreak = wagerWon ? user.winStreak + 1 : 0;
     let numTokens = user.numTokens - tokensWagered;
-    let bonusAwarded = false;
+    let bonusMultiplierAwarded: number | null = null;
     if (wagerWon) {
       let multiplier = 2;
       if (winStreak === 3) {
         multiplier = 3;
-        bonusAwarded = true;
+        bonusMultiplierAwarded = 3;
       } else if (winStreak === 5) {
         multiplier = 10;
         winStreak = 0;
-        bonusAwarded = true;
+        bonusMultiplierAwarded = 10;
       }
       numTokens += tokensWagered * multiplier;
     }
@@ -61,7 +61,7 @@ const wager: RequestHandler = async (req, res) => {
       wagerWon,
       netWin: numTokens - user.numTokens,
       initialBalance: user.numTokens,
-      bonusAwarded,
+      bonusMultiplierAwarded,
     };
     let lastTenWagers = [...user.lastTenWagers, wagerResult].slice(-10);
 

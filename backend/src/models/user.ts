@@ -45,8 +45,8 @@ class Wager implements IWager {
   @prop({ required: true })
   netWin: number;
 
-  @prop({ required: true })
-  bonusAwarded: boolean;
+  @prop({ type: Number, nullable: true })
+  bonusMultiplierAwarded: number | null;
 }
 
 export const UserModel = getModelForClass(User);
