@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../..";
 import { RootState } from "../../reducers";
+import { CLEAR_GAME } from "../../reducers/game";
 import { LOGOUT } from "../../reducers/login";
 import { getUser } from "../../utils/local-storage";
 import { styles } from "./styles";
@@ -26,6 +27,7 @@ const Navbar = () => {
 
   const logout = () => {
     dispatch(LOGOUT());
+    dispatch(CLEAR_GAME());
     history("/auth");
     setUser(null);
   };

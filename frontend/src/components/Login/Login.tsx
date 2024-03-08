@@ -63,7 +63,6 @@ const Login = () => {
         <Container component="main" maxWidth="xs">
           <Paper sx={styles.paper} elevation={3}>
             <Avatar sx={styles.avatar}>
-              {" "}
               <LockIcon />
             </Avatar>
             <Typography variant="h5" color="primary">

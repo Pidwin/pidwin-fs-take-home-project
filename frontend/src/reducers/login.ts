@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { LoginResponse } from "shared/interfaces";
 
-interface ILoginState {
+type LoginState = {
   token: string | null;
-}
+};
 
-const initialState: ILoginState = { token: null };
+const initialState: LoginState = { token: null };
 
 const loginSlice = createSlice({
   name: "login",

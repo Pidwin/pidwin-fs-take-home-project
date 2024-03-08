@@ -41,7 +41,6 @@ const Home = () => {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log({ user });
     if (!gameState) {
       dispatch(fetchGame());
     }
@@ -150,7 +149,7 @@ const Home = () => {
                     <TableCell align="center">Wager #</TableCell>
                     <TableCell align="center">Initial Balance</TableCell>
                     <TableCell align="center">Tokens Wagered</TableCell>
-                    <TableCell align="center">Wagered Heads</TableCell>
+                    <TableCell align="center">Wagered Side</TableCell>
                     <TableCell align="center">Result</TableCell>
                     <TableCell align="center">Net Win</TableCell>
                     <TableCell align="center">Bonus Payout?</TableCell>
@@ -175,7 +174,9 @@ const Home = () => {
                       </TableCell>
                       <TableCell align="center">{row.netWin}</TableCell>
                       <TableCell align="center">
-                        {row.bonusMultiplierAwarded ?? 'N/A'}
+                        {row.bonusMultiplierAwarded
+                          ? `${row.bonusMultiplierAwarded}x`
+                          : "N/A"}
                       </TableCell>
                     </TableRow>
                   ))}

@@ -13,7 +13,10 @@ const gameSlice = createSlice({
       const newState = state ? { ...state, ...action.payload } : action.payload;
       return newState;
     },
+    CLEAR_GAME() {
+      return null;
+    },
   },
 });
-export const { FETCH } = gameSlice.actions;
+export const { FETCH, CLEAR_GAME } = gameSlice.actions;
 export const gameReducer = gameSlice.reducer;

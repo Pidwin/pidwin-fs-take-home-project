@@ -40,7 +40,7 @@ describe("fetchGame", () => {
     expect(response.status).toBe(404);
   });
 
-  it("should fail if the user does not exist", async () => {
+  it("should return the user's data if they do exist", async () => {
     // Create a mock user
     const mockUser: IUser = {
       _id: "test",

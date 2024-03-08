@@ -9,6 +9,7 @@ import {
 } from "shared/interfaces";
 import * as api from "../api";
 import * as messages from "../messages";
+import { CLEAR_GAME } from "../reducers/game";
 import { LOGIN, LOGOUT } from "../reducers/login";
 
 /**
@@ -70,6 +71,7 @@ export const changePassword = createAsyncThunk(
       const { input, history } = thunkArg;
       await api.changePassword(input);
       thunkAPI.dispatch(LOGOUT());
+      thunkAPI.dispatch(CLEAR_GAME());
       messages.success("Password Change Was Successful");
       history("/");
     } catch (error) {
