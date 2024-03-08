@@ -105,11 +105,6 @@ const Home = () => {
                   type="number"
                   value={formData.tokensWagered}
                   onChange={handleWagerChange}
-                  inputProps={{
-                    inputProps: {
-                      min: 1,
-                    },
-                  }}
                 />
                 <RadioGroup
                   value={formData.wageredHeads}
