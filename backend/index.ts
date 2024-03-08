@@ -8,7 +8,7 @@ import userRouter from "./src/api/user/user";
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 app.use(bodyParser.json({ limit: "5mb" }));
 app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
 
@@ -23,9 +23,11 @@ if (!mongoUrl) {
   throw new Error("Please define MONGODB_URL within the server's .env file.");
 }
 
-mongoose
-  .connect(mongoUrl)
-  .then(() =>
-    app.listen(PORT, () => console.log(`Server Started On Port ${PORT}`))
-  )
-  .catch((error) => console.log(error.message));
+if (process.env.NODE_ENV !== "test") {
+  mongoose
+    .connect(mongoUrl)
+    .then(() =>
+      app.listen(PORT, () => console.log(`Server Started On Port ${PORT}`))
+    )
+    .catch((error) => console.log(error.message));
+}

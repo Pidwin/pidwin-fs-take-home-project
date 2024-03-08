@@ -1,5 +1,6 @@
+import { getModelForClass } from "@typegoose/typegoose";
 import { RequestHandler } from "express";
-import { UserModel } from "../../models/user";
+import { User } from "../../models/user";
 
 /**
  * Services a user's request to get their current game state.
@@ -12,7 +13,9 @@ const fetchGame: RequestHandler = async (req, res) => {
     }
 
     // Find and return the user's current game state.
-    const existingUser = await UserModel.findOne({ _id: req.params.userId });
+    const existingUser = await getModelForClass(User).findOne({
+      _id: req.params.userId,
+    });
     if (!existingUser) {
       return res.status(404).json({ message: "User Does Not Exist" });
     }

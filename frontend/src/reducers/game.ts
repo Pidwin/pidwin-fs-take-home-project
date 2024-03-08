@@ -11,8 +11,6 @@ const gameSlice = createSlice({
   reducers: {
     FETCH(state, action: PayloadAction<GameFetchResponse>) {
       const newState = state ? { ...state, ...action.payload } : action.payload;
-      console.log({ action });
-      console.log({ newState });
       return newState;
     },
   },

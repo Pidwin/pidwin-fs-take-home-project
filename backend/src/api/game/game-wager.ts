@@ -1,6 +1,8 @@
+import { getModelForClass } from "@typegoose/typegoose";
+import { getRandomBoolean } from "backend/src/utils/rand";
 import { RequestHandler } from "express";
-import { UserModel } from "../../models/user";
 import { IWager } from "shared/interfaces";
+import { User } from "../../models/user";
 
 const wager: RequestHandler = async (req, res) => {
   const { wageredHeads, tokensWagered } = req.body;
@@ -12,7 +14,9 @@ const wager: RequestHandler = async (req, res) => {
     }
 
     // Find the user.
-    const user = await UserModel.findOne({ _id: req.params.userId });
+    const user = await getModelForClass(User).findOne({
+      _id: req.params.userId,
+    });
     if (!user) {
       return res.status(404).json({ message: "User Does Not Exist" });
     }
@@ -31,7 +35,7 @@ const wager: RequestHandler = async (req, res) => {
     }
 
     // Determine the result of the wager.
-    const landedHeads = Math.random() < 0.5;
+    const landedHeads = getRandomBoolean();
     const wagerWon = landedHeads === wageredHeads;
 
     // Calculate the user's new game state.
@@ -62,7 +66,7 @@ const wager: RequestHandler = async (req, res) => {
     let lastTenWagers = [...user.lastTenWagers, wagerResult].slice(-10);
 
     // Update the user's balance.
-    const updateUser = await UserModel.findByIdAndUpdate(
+    const updateUser = await getModelForClass(User).findByIdAndUpdate(
       user._id,
       { numTokens, winStreak, lastTenWagers },
       { new: true }
