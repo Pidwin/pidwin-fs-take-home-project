@@ -1,7 +1,8 @@
 import Lucky7Result from '../models/lucky7Result.js';
 import Bet from '../models/bet.js'; 
 import User from '../models/user.js'
-export async function lucky7Game(){
+
+export async function lucky7Game(io){
     const dice1 = Math.floor(Math.random() * 7) + 1
     const dice2 = Math.floor(Math.random() * 7) + 1
     const total = dice1 + dice2
@@ -17,7 +18,9 @@ export async function lucky7Game(){
    await bets.forEach( async(bet) =>{
         if(bet.areDiceLucky === lucky ){ // user guessed correctly
             // update user win streak
-            await User.updateOne({ _id: bet.userId },{ $inc:{winStreak: 1}})
+            const user = await User.findOneAndUpdate({ _id: bet.userId },{ $inc:{winStreak: 1}})
+            
+            io.emit(user.email, "winner!")
         } else{ // // user guessed incorrectly
 
             await User.updateOne({ _id: bet.userId },{ winStreak:0  })
@@ -25,7 +28,11 @@ export async function lucky7Game(){
 
         //associate the bet with the game of lucky7s
        await Bet.updateOne({_id: bet._id}, {lucky7Id: lucky7._id })
+
+
     })
+
+
 
 
 }
