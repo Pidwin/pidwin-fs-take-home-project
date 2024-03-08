@@ -1,8 +1,8 @@
 import { getModelForClass } from "@typegoose/typegoose";
-import { getRandomBoolean } from "backend/src/utils/rand";
 import { RequestHandler } from "express";
 import { IWager } from "shared/interfaces";
 import { User } from "../../models/user";
+import { getRandomBoolean } from "../../utils/rand";
 
 const wager: RequestHandler = async (req, res) => {
   const { wageredHeads, tokensWagered } = req.body;
