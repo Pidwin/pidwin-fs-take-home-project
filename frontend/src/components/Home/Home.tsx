@@ -175,7 +175,7 @@ const Home = () => {
                       </TableCell>
                       <TableCell align="center">{row.netWin}</TableCell>
                       <TableCell align="center">
-                        {row.bonusAwarded ? "True" : "False"}
+                        {row.bonusMultiplierAwarded ?? 'N/A'}
                       </TableCell>
                     </TableRow>
                   ))}
