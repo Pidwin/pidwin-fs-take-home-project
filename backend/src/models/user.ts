@@ -22,8 +22,31 @@ export class User implements IUser {
   @prop({ required: true })
   winStreak: number;
 
+  @prop({ type: () => Wager, required: true })
+  lastTenWagers: Wager[];
+}
+
+/**
+ * A wager of the coin game.
+ */
+class Wager implements IWager {
   @prop({ required: true })
-  lastTenWagers: IWager[];
+  initialBalance: number;
+
+  @prop({ required: true })
+  tokensWagered: number;
+
+  @prop({ required: true })
+  wageredHeads: boolean;
+
+  @prop({ required: true })
+  wagerWon: boolean;
+
+  @prop({ required: true })
+  netWin: number;
+
+  @prop({ required: true })
+  bonusAwarded: boolean;
 }
 
 export const UserModel = getModelForClass(User);
