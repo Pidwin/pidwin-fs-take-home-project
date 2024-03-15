@@ -1,6 +1,6 @@
-import { LOGIN, LOGOUT, SET_TOKEN_BALANCE } from "../constants/actionTypes";
 import * as api from "../api";
 import * as messages from "../messages";
+import { LOGIN, LOGOUT, SET_TOKEN_BALANCE } from "../constants/actionTypes";
 
 export const signup = (formData, history) => async (dispatch) => {
   try {

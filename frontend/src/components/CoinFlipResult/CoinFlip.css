@@ -1,23 +1,23 @@
 @keyframes flip {
   0% { transform: rotateY(0); }
-  100% { transform: rotateY(1800deg); } /* Ends with a multiple of 360 for a full rotation */
+  100% { transform: rotateY(1800deg); } 
 }
 .container {
   display: flex;
-  justify-content: center; /* Horizontally centers the child */
-  align-items: center; /* Vertically centers the child */
-  height: 100%; /* Or the height you want for your container */
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .coin {
-  width: 100px; /* Set the size of your coin */
+  width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-image: url('../../assets/Penny-Heads.png'); /* Path to your heads image */
+  background-image: url('../../assets/Penny-Heads.png'); 
   background-size: cover;
-  animation: flip 3s forwards; /* Adjust time as needed */
+  animation: flip 3s forwards; 
 }
 
 .coin.tails {
-  background-image: url('../../assets/Penny-Tails.png'); /* Path to your tails image */
+  background-image: url('../../assets/Penny-Tails.png'); 
 }

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { jwtDecode } from "jwt-decode";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,7 +8,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import * as api from "../../api";
-import { jwtDecode } from "jwt-decode";
 import { getLoggedInUser } from "../../utils/get-logged-in-user";
 
 const WagerHistory = () => {

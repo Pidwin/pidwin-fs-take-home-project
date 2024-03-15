@@ -1,7 +1,7 @@
+import { jwtDecode } from "jwt-decode";
 import { SET_TOKEN_BALANCE } from "../constants/actionTypes";
 import * as api from "../api";
 import * as messages from "../messages";
-import { jwtDecode } from "jwt-decode";
 
 export const loadUserTokenBalance = (userEmail) => async (dispatch) => {
   try {
@@ -12,7 +12,7 @@ export const loadUserTokenBalance = (userEmail) => async (dispatch) => {
       data: decodedResult.tokenBalance,
     });
   } catch (error) {
-	console.log("error", error);
+    console.log("error", error);
     messages.error(error.response.data.message);
   }
 };
