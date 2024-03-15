@@ -1,9 +1,12 @@
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import Wager from "../models/wager.js";
 
-const login = async (req, res) => {
-  const { email, password } = req.body;
+const wagerHistory = async (req, res) => {
+  const { email } = req.body;
+  if (!req.userId) {
+    return res.status(401).json({ message: "Unauthenticated" });
+  }
 
   try {
     const existingUser = await User.findOne({ email });
@@ -11,32 +14,22 @@ const login = async (req, res) => {
     if (!existingUser) {
       return res.status(404).json({ message: "User Does Not Exist" });
     }
-
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
-
-    if (!isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid Password" });
-    }
+    const recentWagers = await Wager.find({ email: email })
+      .sort({ createdAt: -1 })
+      .limit(10);
 
     const token = jwt.sign(
       {
         _id: existingUser._id,
-        name: existingUser.name,
-        email: existingUser.email,
-        password: existingUser.password,
-        tokens: existingUser.tokens,
+        recentWagers: recentWagers,
       },
       "test",
       { expiresIn: "1h" }
     );
-
     res.status(200).json({ token });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
 
-export default login;
+export default wagerHistory;

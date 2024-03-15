@@ -27,6 +27,7 @@ const signup = async (req, res) => {
         name: result.name,
         email: result.email,
         password: result.hashedPassword,
+        tokens: result.tokens,
       },
       "test",
       { expiresIn: "1h" }

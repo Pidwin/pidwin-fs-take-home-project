@@ -11,14 +11,12 @@ import Input from "../Login/Input";
 import { styles } from "./styles";
 import LockIcon from "@mui/icons-material/LockRounded";
 import { changePassword } from "../../actions/login";
-import { jwtDecode } from "jwt-decode";
+import { getLoggedInUser } from "../../utils/get-logged-in-user";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const PasswordSetting = () => {
-  const user = localStorage.getItem("profile")
-    ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-    : "null";
+      const user = getLoggedInUser();
   const isSingedIn = user;
   const history = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +41,7 @@ const PasswordSetting = () => {
   };
 
   useEffect(() => {
-    if (isSingedIn == "null" || isSingedIn === null) {
+    if (isSingedIn === "null" || isSingedIn === null) {
       history("/");
     }
   }, []);

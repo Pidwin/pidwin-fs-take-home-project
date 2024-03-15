@@ -21,14 +21,30 @@ export const styles = {
     justifyContent: "flex-end",
     width: "1000px",
   },
-  profile: {
+  navContainer: {
     display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     justifyContent: "space-between",
     width: "600px",
   },
-  userName: {
+  profileContainer: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
+    width: "300px",
+  },
+  buttonsContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "400px",
+  },
+  userName: {
+    marginLeft: "10px",
+  },
+  button: {
+    margin: "3px",
   },
   brandContainer: {
     display: "flex",
