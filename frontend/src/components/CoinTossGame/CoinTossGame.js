@@ -1,26 +1,25 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  Typography,
-  TextField,
   Button,
-  Radio,
-  RadioGroup,
   FormControl,
   FormControlLabel,
   FormLabel,
   Paper,
+  Radio,
+  RadioGroup,
   Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
 import CoinFlipResult from "../CoinFlipResult/CoinFlipResult";
 import WagerHistory from "../WagerHistory/WagerHistory";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 
 const CoinTossGame = () => {
   const tokenBalance = useSelector((state) => state.tokens.tokenBalance);
-  const [wagerAmount, setWagerAmount] = useState("");
   const [isHeads, setIsHeads] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [wagerAmount, setWagerAmount] = useState("");
   const dispatch = useDispatch();
 
   const handleWagerChange = (event) => {

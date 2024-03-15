@@ -1,11 +1,18 @@
+// External libraries
 import React, { useEffect, useState } from "react";
-import "./CoinFlip.css";
-import { Button, Typography } from "@mui/material";
-import * as api from "../../api";
 import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
-import { getLoggedInUser } from "../../utils/get-logged-in-user";
+
+// Component imports
+import { Button, Typography } from "@mui/material";
+
+// Internal utilities
+import * as api from "../../api";
 import * as messages from "../../messages";
+import { getLoggedInUser } from "../../utils/get-logged-in-user";
+
+// Stylesheets
+import "./CoinFlip.css";
 
 const CoinFlipResult = ({
   handlePlayAgain,
@@ -16,6 +23,7 @@ const CoinFlipResult = ({
   const [resultIsHeads, setResultIsHeads] = useState(true);
   const [payoutAmount, setPayoutAmount] = useState(0);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     let flipTimeout;
 
@@ -35,11 +43,11 @@ const CoinFlipResult = ({
         flipTimeout = setTimeout(() => {
           setFlipping(false);
           if (wagerResultDecoded) {
-			if (wagerResultDecoded.wagerPayout > 0) {
-        messages.success("Congratulations, You Won!");
-      } else {
-        messages.error("Sorry, You Lost! Try Again!");
-      }
+            if (wagerResultDecoded.wagerPayout > 0) {
+              messages.success("Congratulations, You Won!");
+            } else {
+              messages.error("Sorry, You Lost! Try Again!");
+            }
             setResultIsHeads(wagerResultDecoded.resultIsHeads);
             setPayoutAmount(wagerResultDecoded.wagerPayout);
             dispatch({
