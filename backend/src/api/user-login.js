@@ -28,8 +28,8 @@ const login = async (req, res) => {
         email: existingUser.email,
         password: existingUser.password,
       },
-      "test",
-      { expiresIn: "1h" }
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
     res.status(200).json({ token });

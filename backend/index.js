@@ -8,8 +8,8 @@ import userRouter from "./src/api/user.js";
 dotenv.config();
 
 const app = express();
-app.use(bodyParser.json({ limit: "5mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
+app.use(bodyParser.json({ limit: process.env.ENCODING_LIMIT, extended: true }));
+app.use(bodyParser.urlencoded({ limit: process.env.ENCODING_LIMIT, extended: true }));
 
 app.use(cors());
 app.use("/api/user", userRouter);

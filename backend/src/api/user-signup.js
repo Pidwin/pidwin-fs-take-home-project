@@ -28,8 +28,8 @@ const signup = async (req, res) => {
         email: result.email,
         password: result.hashedPassword,
       },
-      "test",
-      { expiresIn: "1h" }
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
     res.status(200).json({ token });
