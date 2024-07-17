@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
+import { get } from 'lodash-es';
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization.split(" ")[1] || '';
     const isCustomAuth = token.length < process.env.CUSTOM_AUTH_LENGTH;
 
     let decodedData;
@@ -12,7 +13,7 @@ const auth = async (req, res, next) => {
       req.userId = decodedData?._id;
     } else {
       decodedData = jwt.decode(token);
-      req.userId = decodedData?.sub;
+      req.userId = get(decodedData, 'sub');
     }
 
     next();
