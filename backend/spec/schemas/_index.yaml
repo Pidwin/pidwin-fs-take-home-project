@@ -1,0 +1,17 @@
+ChangePassword:
+  $ref: ./change-password.yaml
+
+ChangedPassword:
+  $ref: ./changed-password.yaml
+
+Login:
+  $ref: ./login.yaml
+
+Message:
+  $ref: ./message.yaml
+
+Signup:
+  $ref: ./signup.yaml
+
+Token:
+  $ref: ./token.yaml

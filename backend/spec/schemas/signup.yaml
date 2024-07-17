@@ -1,0 +1,17 @@
+required:
+  - email
+  - password
+  - confirmPassword
+  - firstName
+  - lastName
+properties:
+  email:
+    type: string
+  password:
+    type: string
+  confirmPassword:
+    type: string
+  firstName:
+    type: string
+  lastName:
+    type: string

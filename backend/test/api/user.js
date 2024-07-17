@@ -112,7 +112,7 @@ describe('POST /api/user/changePassword', () => {
       });
 
     expect(response.status).to.equal(401);
-    expect(response.text).to.contain('{"message":"Unauthenticated"}');
+    expect(JSON.parse(response.text)).to.contain({ message: 'unauthorized' });
   });
 
   it('Fails to change password when invalid password', async () => {

@@ -1,0 +1,8 @@
+/api/user/changePassword:
+  $ref: ./user-change-password.yaml
+
+/api/user/login:
+  $ref: ./user-login.yaml
+
+/api/user/signup:
+  $ref: ./user-signup.yaml

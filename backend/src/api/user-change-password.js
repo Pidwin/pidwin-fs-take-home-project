@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.js";
+import { omit } from 'lodash-es';
 
 const changePassword = async (req, res) => {
   const { email, oldPassword, newPassword } = req.body;
@@ -9,10 +10,6 @@ const changePassword = async (req, res) => {
 
     if (!existingUser) {
       return res.status(404).json({ message: "User Does Not Exist" });
-    }
-
-    if (!req.userId) {
-      return res.status(401).json({ message: "Unauthenticated" });
     }
 
     const isPasswordCorrect = await bcrypt.compare(
@@ -31,7 +28,7 @@ const changePassword = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json(updatePassword);
+    res.status(200).json(omit(updatePassword, '_id'));
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }

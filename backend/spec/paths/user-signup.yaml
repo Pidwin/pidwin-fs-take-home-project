@@ -1,0 +1,28 @@
+post:
+  x-eov-operation-id: default
+  x-eov-operation-handler: api/user-signup
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../api.yaml#/components/schemas/Signup'
+    required: true
+  responses:
+    200:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../api.yaml#/components/schemas/Token'
+    400:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../api.yaml#/components/schemas/Message'
+    500:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: '../api.yaml#/components/schemas/Message'
