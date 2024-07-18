@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import bigInt from '../utils/big-int.js';
 
 const signup = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
@@ -19,7 +20,7 @@ const signup = async (req, res) => {
     email,
     password: hashedPassword,
     name: `${firstName} ${lastName}`,
-    tokens: BigInt(process.env.STARTING_TOKENS),
+    tokens: bigInt(process.env.STARTING_TOKENS),
   });
   const token = jwt.sign(
     {

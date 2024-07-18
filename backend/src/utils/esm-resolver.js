@@ -31,7 +31,6 @@ const esmResolver = (handlerPath) => ({
       try {
         await handlerCache[cacheKey](req, res);
       } catch (error) {
-        console.log({ error });
         next(new Error(`Router error: ${handler}.${id}`));
       }
     };

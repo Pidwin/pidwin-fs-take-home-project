@@ -28,8 +28,6 @@ const changePassword = async (req, res) => {
     { new: true }
   );
 
-console.log('changePassword', 7)
-
   res.status(200).json(omit(updatePassword, '_id'));
 };
 
