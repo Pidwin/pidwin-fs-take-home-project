@@ -1,0 +1,12 @@
+required:
+  - guess
+  - wager
+properties:
+  guess:
+    type: string
+    enum:
+      - 'heads'
+      - 'tails'
+  wager:
+    type: string
+    pattern: "^-?[0-9]*$"

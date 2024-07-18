@@ -25,7 +25,8 @@
     "express-openapi-validator": "^5.2.0",
     "jsonwebtoken": "^9.0.2",
     "lodash-es": "^4.17.21",
-    "mongoose": "^8.1.0"
+    "mongoose": "^8.1.0",
+    "pure-rand": "^6.1.0"
   },
   "devDependencies": {
     "c8": "^10.1.2",

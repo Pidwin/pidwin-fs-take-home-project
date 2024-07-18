@@ -1,22 +1,20 @@
 import React from "react";
 import { Container, Grow, Paper, Typography } from "@mui/material";
-import { jwtDecode } from "jwt-decode";
+import Game from '../Game/Game';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
-
-  const user = localStorage.getItem("profile")
-    ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-    : "null";
-  const isSingedIn = user;
+  const { login } = useSelector((state) => state.login);
 
   return (
     <Grow in>
-      <Container component="main" maxWidth="sm">
-        <Paper elevation={3}>
-          {isSingedIn !== "null" && isSingedIn !== null ? (
-            <Typography variant="h4" align="center" color="primary">
-              {`Welcome ${user.name}`}
-            </Typography>
+      <Container component="main" maxWidth="sm" sx={{  }}>
+        <Paper elevation={3} sx={{
+          p: 1,
+          position: 'relative',
+        }}>
+          {login.token !== 'null' && login.token !== null ? (
+            <Game />
           ) : (
             <Typography variant="h4" align="center" color="primary">
               Login to Play

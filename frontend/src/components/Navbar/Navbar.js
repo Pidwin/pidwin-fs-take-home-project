@@ -1,28 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { AppBar, Typography, Toolbar, Avatar, Button } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { jwtDecode } from "jwt-decode";
+import { useDispatch, useSelector } from 'react-redux';
 import * as actionType from "../../constants/actionTypes";
 import { styles } from "./styles";
-import { forEach, omit } from 'lodash-es';
 
 const Navbar = () => {
+  const { login } = useSelector((state) => state.login);
+  const { cointoss } = useSelector((state) => state.cointoss);
 
-  const loadUser = () => {
-    if (!localStorage.getItem('profile')) {
-      return 'null';
-    }
-    const profile = JSON.parse(localStorage.getItem('profile'));
-    return {
-      ...jwtDecode(profile.token),
-      ...forEach(omit(profile, 'token'), (v, k, o) => {
-        o[k] = k === 'tokens' ? BigInt(v) : v;
-      }),
-    };
-  };
-
-  const [user, setUser] = useState(loadUser());
   const dispatch = useDispatch();
   let location = useLocation();
   const history = useNavigate();
@@ -30,14 +16,12 @@ const Navbar = () => {
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
     history("/auth");
-    setUser("null");
   };
 
   useEffect(() => {
-    if (user !== "null" && user !== null) {
-      if (user.exp * 1000 < new Date().getTime()) logout();
+    if (login.token !== 'null' && login.token !== null) {
+      if (login.exp * 1000 < new Date().getTime()) logout();
     }
-    setUser(loadUser());
   }, [location]);
 
   return (
@@ -54,16 +38,16 @@ const Navbar = () => {
         </Typography>
       </div>
       <Toolbar sx={styles.toolbar}>
-        {user !== "null" && user !== null ? (
+        {login.token !== 'null' && login.token !== null ? (
           <div sx={styles.profile}>
-            <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
-              {user.name.charAt(0)}
+            <Avatar sx={styles.purple} alt={login.name} src={login.picture}>
+              {login.name.charAt(0)}
             </Avatar>
-            <Typography sx={styles.userName} variant="h6">
-              {user.name}
+            <Typography sx={styles.loginName} variant="h6">
+              Hey {login.name}!
             </Typography>
             <Typography sx={styles.coins} variant="h6">
-              <>Coins {user.tokens.toString()}</>
+              <>Coins {cointoss.tokens.toString()}</>
             </Typography>
             <Button
               variant="contained"

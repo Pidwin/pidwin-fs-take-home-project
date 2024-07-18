@@ -6,3 +6,6 @@
 
 /api/user/signup:
   $ref: ./user-signup.yaml
+
+/api/wager:
+  $ref: ./wager.yaml

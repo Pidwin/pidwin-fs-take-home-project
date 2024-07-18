@@ -15,3 +15,8 @@ Signup:
 
 LoggedIn:
   $ref: ./logged-in.yaml
+
+Wager:
+  $ref: ./wager.yaml
+WagerResult:
+  $ref: ./wager-result.yaml

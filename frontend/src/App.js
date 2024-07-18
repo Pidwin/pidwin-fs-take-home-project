@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import PasswordSetting from "./components/PasswordSettings/PasswordSettings";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
           <Route exact path="/auth" element={<Login />} />
           <Route exact path="/password" element={<PasswordSetting />} />
         </Routes>
+        <Footer />
       </Container>
     </BrowserRouter>
   );
