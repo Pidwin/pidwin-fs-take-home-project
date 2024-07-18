@@ -31,7 +31,10 @@ const login = async (req, res) => {
     { expiresIn: process.env.JWT_EXPIRES_IN }
   );
 
-  res.status(200).json({ token });
+  res.status(200).json({
+    token,
+    tokens: existingUser.tokens.toString()
+  });
 };
 
 export default login;

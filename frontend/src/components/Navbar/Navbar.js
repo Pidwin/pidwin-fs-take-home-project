@@ -5,13 +5,24 @@ import { useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import * as actionType from "../../constants/actionTypes";
 import { styles } from "./styles";
+import { forEach, omit } from 'lodash-es';
 
 const Navbar = () => {
-  const [user, setUser] = useState(
-    localStorage.getItem("profile")
-      ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-      : "null"
-  );
+
+  const loadUser = () => {
+    if (!localStorage.getItem('profile')) {
+      return 'null';
+    }
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    return {
+      ...jwtDecode(profile.token),
+      ...forEach(omit(profile, 'token'), (v, k, o) => {
+        o[k] = k === 'tokens' ? BigInt(v) : v;
+      }),
+    };
+  };
+
+  const [user, setUser] = useState(loadUser());
   const dispatch = useDispatch();
   let location = useLocation();
   const history = useNavigate();
@@ -26,11 +37,7 @@ const Navbar = () => {
     if (user !== "null" && user !== null) {
       if (user.exp * 1000 < new Date().getTime()) logout();
     }
-    setUser(
-      localStorage.getItem("profile")
-        ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-        : "null"
-    );
+    setUser(loadUser());
   }, [location]);
 
   return (
@@ -54,6 +61,9 @@ const Navbar = () => {
             </Avatar>
             <Typography sx={styles.userName} variant="h6">
               {user.name}
+            </Typography>
+            <Typography sx={styles.coins} variant="h6">
+              <>Coins {user.tokens.toString()}</>
             </Typography>
             <Button
               variant="contained"

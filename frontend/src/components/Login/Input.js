@@ -2,6 +2,7 @@ import React from "react";
 import { TextField, Grid, InputAdornment, IconButton } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import PropTypes from 'prop-types';
 
 const Input = ({
   name,
@@ -40,5 +41,16 @@ const Input = ({
     />
   </Grid>
 );
+
+Input.propTypes = {
+  name: PropTypes.string,
+  value: PropTypes.string,
+  handleChange: PropTypes.func,
+  label: PropTypes.string,
+  half: PropTypes.bool,
+  autoFocus: PropTypes.string,
+  type: PropTypes.string,
+  handleShowPassword: PropTypes.func,
+};
 
 export default Input;

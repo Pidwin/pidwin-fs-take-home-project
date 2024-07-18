@@ -33,7 +33,7 @@ const PasswordSetting = () => {
     setChangeFormData({ ...changeFormData, [e.target.name]: e.target.value });
   };
 
-  const handleShowPassword = (e) => {
+  const handleShowPassword = () => {
     setShowPassword((prevPassword) => !prevPassword);
   };
 

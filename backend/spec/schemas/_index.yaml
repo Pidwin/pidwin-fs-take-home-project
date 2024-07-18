@@ -13,5 +13,5 @@ Message:
 Signup:
   $ref: ./signup.yaml
 
-Token:
-  $ref: ./token.yaml
+LoggedIn:
+  $ref: ./logged-in.yaml

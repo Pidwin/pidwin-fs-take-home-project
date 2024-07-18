@@ -47,11 +47,11 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleShowPassword = (e) => {
+  const handleShowPassword = () => {
     setShowPassword((prevPassword) => !prevPassword);
   };
 
-  const switchLogin = (e) => {
+  const switchLogin = () => {
     setIsLoggedIn((prevState) => !prevState);
   };
 

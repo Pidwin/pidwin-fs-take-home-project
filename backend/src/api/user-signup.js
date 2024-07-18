@@ -19,6 +19,7 @@ const signup = async (req, res) => {
     email,
     password: hashedPassword,
     name: `${firstName} ${lastName}`,
+    tokens: BigInt(process.env.STARTING_TOKENS),
   });
   const token = jwt.sign(
     {
@@ -31,7 +32,10 @@ const signup = async (req, res) => {
     { expiresIn: process.env.JWT_EXPIRES_IN }
   );
 
-  res.status(200).json({ token });
+  res.status(200).json({
+    token,
+    tokens: result.tokens.toString()
+  });
 };
 
 export default signup;
