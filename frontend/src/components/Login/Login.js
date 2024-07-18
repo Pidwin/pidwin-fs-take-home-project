@@ -7,7 +7,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import Input from "./Input";
+import Input from '../Input/Input';
 import { jwtDecode } from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";

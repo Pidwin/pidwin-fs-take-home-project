@@ -7,7 +7,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import Input from "../Login/Input";
+import Input from "../Input/Input";
 import { styles } from "./styles";
 import LockIcon from "@mui/icons-material/LockRounded";
 import { changePassword } from "../../actions/login";
