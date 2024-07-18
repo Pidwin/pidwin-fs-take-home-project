@@ -27,7 +27,7 @@ app.use(OpenApiValidator.middleware({
   validateSecurity: { handlers: { BearerAuth: auth } }
 }));
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({
+  res.status(get(err, 'status', 500)).json({
     message: err.message,
     errors: err.errors,
   });

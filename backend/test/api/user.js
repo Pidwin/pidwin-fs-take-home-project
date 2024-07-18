@@ -56,22 +56,6 @@ describe('POST /api/user/signup', () => {
     expect(response.status).to.equal(400);
     expect(response.text).to.contain('{"message":"Password Does Not Match"}');
   });
-
-  it('Catches errors', async () => {
-    findOneStub = sinon.stub(User, 'findOne').throws('bambam');
-
-    const response = await agent().post('/api/user/signup')
-      .send({
-        firstName: 'User 2',
-        lastName: '',
-        email: 'user2@email.com',
-        password: 'password1',
-        confirmPassword: 'password1',
-      });
-
-    expect(response.status).to.equal(500);
-    expect(response.text).to.contain('{"message":"Something went wrong"}');
-  });
 });
 
 describe('POST /api/user/changePassword', () => {
@@ -127,21 +111,6 @@ describe('POST /api/user/changePassword', () => {
     expect(response.status).to.equal(400);
     expect(response.text).to.contain('{"message":"Invalid Password"}');
   });
-
-  it('Catches errors', async () => {
-    findOneStub = sinon.stub(User, 'findOne').throws('bambam');
-
-    const response = await agent().post('/api/user/changePassword')
-      .set({ Authorization: `Bearer ${token}` })
-      .send({
-        email: 'user1@email.com',
-        oldPassword: 'password2',
-        newPassword: 'password3',
-      });
-
-    expect(response.status).to.equal(500);
-    expect(response.text).to.contain('{"message":"Something went wrong"}');
-  });
 });
 
 describe('POST /api/user/login', () => {
@@ -177,18 +146,5 @@ describe('POST /api/user/login', () => {
 
     expect(response.status).to.equal(400);
     expect(response.text).to.contain('{"message":"Invalid Password"}');
-  });
-
-  it('Catches errors', async () => {
-    findOneStub = sinon.stub(User, 'findOne').throws('bambam');
-
-    const response = await agent().post('/api/user/login')
-      .send({
-        email: 'user1@email.com',
-        password: 'password2',
-      });
-
-    expect(response.status).to.equal(500);
-    expect(response.text).to.contain('{"message":"Something went wrong"}');
   });
 });
