@@ -31,6 +31,8 @@ npm run start
 
 The backend is now up and running.
 
+There's more about the backend in `./backend/README.md`!
+
 ---
 
 

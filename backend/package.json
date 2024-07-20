@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npm run spec && node index.js",
-    "mocha": "mocha --recursive -- --require=./test/test-helpers/hooks.js",
+    "mocha": "mocha --recursive -- --require=./test/test-helpers/hooks.js -r dotenv/config",
     "coverage-html": "npx mcr npm run mocha",
     "coverage-text": "npx c8 npm run mocha",
     "test": "npm run coverage-text",

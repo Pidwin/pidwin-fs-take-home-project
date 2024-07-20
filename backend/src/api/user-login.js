@@ -3,38 +3,42 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email });
 
-  if (!existingUser) {
-    return res.status(404).json({ message: 'User Not Found' });
+    if (!existingUser) {
+      return res.status(404).json({ message: 'User Not Found' });
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+
+    if (!isPasswordCorrect) {
+      return res.status(400).json({ message: "Invalid Password" });
+    }
+
+    const token = jwt.sign(
+      {
+        _id: existingUser._id,
+        name: existingUser.name,
+        email: existingUser.email,
+        password: existingUser.password,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
+    );
+
+    res.status(200).json({
+      token,
+      tokens: existingUser.tokens.toString()
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Something went wrong' });
   }
-
-  const isPasswordCorrect = await bcrypt.compare(
-    password,
-    existingUser.password
-  );
-
-  if (!isPasswordCorrect) {
-    return res.status(400).json({ message: "Invalid Password" });
-  }
-
-  const token = jwt.sign(
-    {
-      _id: existingUser._id,
-      name: existingUser.name,
-      email: existingUser.email,
-      password: existingUser.password,
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRES_IN }
-  );
-
-  res.status(200).json({
-    token,
-    tokens: existingUser.tokens.toString()
-  });
 };
 
 export default login;

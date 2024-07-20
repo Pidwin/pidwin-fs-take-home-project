@@ -1,23 +1,9 @@
 required:
-  - answer
-  - payout
-  - tokens
-  - wager
-  - winner
-properties:
-  answer:
-    type: string
-    enum:
-      - 'heads'
-      - 'tails'
-  payout:
-    type: string
-    pattern: "^-?[0-9]*$"
-  tokens:
-    type: string
-    pattern: "^-?[0-9]*$"
-  wager:
-    type: string
-    pattern: "^-?[0-9]*$"
-  winner:
-    type: boolean
+- answer
+- payout
+- rate
+- tokens
+- wager
+- winner
+- history
+$ref: '../api.yaml#/components/schemas/HistoryResult'

@@ -18,5 +18,9 @@ LoggedIn:
 
 Wager:
   $ref: ./wager.yaml
+
 WagerResult:
   $ref: ./wager-result.yaml
+
+HistoryResult:
+  $ref: ./history-result.yaml

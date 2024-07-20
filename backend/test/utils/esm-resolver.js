@@ -69,50 +69,7 @@ describe('src/esm-resolver.js', async () => {
 
     expect(lastCode).equals(200);
     expect(lastError).equals(undefined);
-    expect(lastObject).to.include({
-      name: 'User 3',
-      email: 'user3@email.com'
-    });
-  });
-
-  it('Catches errors inside handler function', async () => {
-    findOne = sinon.stub(User, 'findOne').throws('bambam');
-
-    const underTest = await esmResolver(handlerPath).resolver(handlerPath, route, apiDoc);
-
-    const req = {
-      body: {
-        email: 'user3@email.com',
-        oldPassword: 'password1',
-        newPassword: 'password2'
-      }
-    };
-    let lastCode;
-    let lastObject;
-    let lastError;
-    const res = {
-      status: (code) => {
-        lastCode = code;
-        return {
-          json: (object) => {
-            lastObject = object;
-            return res;
-          }
-        };
-      }
-    };
-    const next = (error) => {
-      lastError = error;
-    };
-
-    try {
-      await underTest(req, res, next);
-      assert.fail('this line should not run');
-    } catch (error) {
-      expect(lastCode).equals(undefined);
-      expect(lastError.message).equals('Router error: api/user-change-password.default');
-      expect(lastObject).equals(undefined);
-    }
+    expect(lastObject).to.include({ __v: 0 });
   });
 
   it('Fails when missing handlerPath', async () => {

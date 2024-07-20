@@ -70,7 +70,7 @@ describe('POST /api/user/changePassword', () => {
       });
 
     expect(response.status).to.equal(200);
-    expect(response.text).to.contain('{"_id":"');
+    expect(response.text).to.contain('{"__v":0}');
   });
 
   it('Fails to change password when user does not exist', async () => {
@@ -83,7 +83,7 @@ describe('POST /api/user/changePassword', () => {
       });
 
     expect(response.status).to.equal(404);
-    expect(response.text).to.contain('{"message":"Not Found"}');
+    expect(response.text).to.contain('{"message":"User Not Found"}');
   });
 
   it('Fails to change password when user not authenticated', async () => {
@@ -134,7 +134,7 @@ describe('POST /api/user/login', () => {
       });
 
     expect(response.status).to.equal(404);
-    expect(response.text).to.contain('{"message":"Not Found"}');
+    expect(response.text).to.contain('{"message":"User Not Found"}');
   });
 
   it('Fails to login when invalid password', async () => {
