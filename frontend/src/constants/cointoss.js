@@ -11,10 +11,10 @@ export const WELCOME_TEXT = '🙋 Welcome to CoinToss!';
 export const WELCOME_SUB_TEXT = '👉 A game of probability and statistics 📊 ... With origins stemming back to the Roman Empire! 👴';
 
 export const GETTING_STARTED_TEXT = '🏗️ Getting Started';
-export const GETTING_STARTED_STEP_1_PRIMARY_TEXT = '💰 Set a <b>Wager</b>';
+export const GETTING_STARTED_STEP_1_PRIMARY_TEXT = <>💰 Set a <b>Wager</b></>;
 export const GETTING_STARTED_STEP_1_SECONDARY_TEXT = (min, max) => `min wager: ${min}; max wager: ${max}`;
-export const GETTING_STARTED_STEP_2_PRIMARY_TEXT = 'Choose <b>Heads</b> 😼 or <b>Tails</b> 🐕';
-export const GETTING_STARTED_STEP_3_PRIMARY_TEXT = '👊 Smack that <b>Lucky</b> button';
+export const GETTING_STARTED_STEP_2_PRIMARY_TEXT = <>Choose <b>Heads</b> 😼 or <b>Tails</b> 🐕</>;
+export const GETTING_STARTED_STEP_3_PRIMARY_TEXT = <>👊 Smack that <b>Lucky</b> button</>;
 
 export const REWARD_SYSTEM_TEXT = '🏆 Game Rewards';
 export const REWARD_SYSTEM_TEXT_STEP_1_PRIMARY_TEXT = 'Single wins are paid at 2:1 odds, where the first number tells you how much you could win, and the second number is the amount you bet. So,  you\'ll get 2 tokens for every 1 token you wager (and win).';
@@ -32,9 +32,9 @@ export const MIN_WAGER = 1;
 export const DEFAULT_GUESS = TAILS_TEXT.toLowerCase();
 
 export const DEBIT_TOAST = (wager) => <>{wager} tokens vanished into thin air! 💨💨</>;
-export const WINNER_TOAST = () => <>Winner winner chicken dinner! 🍽️🍗</>;
+export const WINNER_TOAST = <>Winner winner chicken dinner! 🍽️🍗</>;
 export const CREDIT_TOAST = (payout) => <>🎉🎉🎉 Congrats!<br />Here&apos;s {payout} more tokens!</>;
-export const LOSER_TOAST = () => <>Seems luck was not on your side! 💔😿</>;
+export const LOSER_TOAST = <>Seems luck was not on your side! 💔😿</>;
 export const TOKENS_TOAST = (tokens) => <>A whopping {tokens} tokens left, champ! 😮</>;
 export const BONUS_COINS_TOAST = (rate) => <>{[...Array(rate)].map(() => '🪙').join('')}</>;
 export const BONUS_TOAST = (rate) => <>Dang, you hit the x{rate} jackpot! 🌟😎</>;

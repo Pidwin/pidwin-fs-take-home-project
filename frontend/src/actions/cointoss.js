@@ -34,7 +34,7 @@ export const wager = (formData, history) => async (dispatch) => {
       messages.success(WINNER_TOAST);
       messages.info(CREDIT_TOAST(data.payout));
     } else {
-      messages.warning(LOSER_TOAST());
+      messages.warning(LOSER_TOAST);
     }
     messages.info(TOKENS_TOAST(data.tokens));
 

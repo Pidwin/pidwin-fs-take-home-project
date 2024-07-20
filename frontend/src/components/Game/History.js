@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import parse from 'html-react-parser';
 import { clone, reverse, map } from 'lodash-es';
 import List2 from '../List/List2';
 
@@ -28,9 +27,7 @@ const History = () => {
       p: 1,
       bgcolor: 'background.paper',
     }}>
-      <Typography variant="h5" color="secondary">
-        {parse(HISTORY_TEXT)}
-      </Typography>
+      <Typography variant="h5" color="secondary">{HISTORY_TEXT}</Typography>
       <br />
       <Divider />
       <List2 items={map(reverse(clone(cointoss.history)), (each) =>

@@ -35,27 +35,6 @@ const List2 = ({
 
 List2.propTypes = {
   items: PropTypes.array,
-  //   PropTypes.shape({
-  //     primary: PropTypes.shape({
-  //       color: PropTypes.string,
-  //       value: PropTypes.oneOfType([
-  //         PropTypes.array,
-  //         PropTypes.number,
-  //         PropTypes.string,
-  //       ]).isRequired,
-  //       variant: PropTypes.string,
-  //     }).isRequired,
-  //     secondary: PropTypes.shape({
-  //       color: PropTypes.string,
-  //       value: PropTypes.oneOfType([
-  //         PropTypes.array,
-  //         PropTypes.number,
-  //         PropTypes.string,
-  //       ]).isRequired,
-  //       variant: PropTypes.string,
-  //     })
-  //   }).isRequired
-  // ).isRequired,
   listStyle: PropTypes.shape(),
   itemStyle: PropTypes.shape(),
 };

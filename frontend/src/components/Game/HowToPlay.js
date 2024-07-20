@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import parse from 'html-react-parser';
 
 import List from '../List/List';
 
@@ -37,12 +36,12 @@ const HowToPlay = () => {
       bgcolor: 'background.paper',
     }}>
       <Typography variant="h4" color="secondary">
-        {parse(WELCOME_TEXT)}
+        {WELCOME_TEXT}
       </Typography>
       <br />
 
       <Typography variant="h5" color="secondary">
-        {parse(WELCOME_SUB_TEXT)}
+        {WELCOME_SUB_TEXT}
       </Typography>
       <br />
 
@@ -55,26 +54,26 @@ const HowToPlay = () => {
           {
             primary: {
               color: 'secondary',
-              value: parse(GETTING_STARTED_STEP_1_PRIMARY_TEXT),
+              value: GETTING_STARTED_STEP_1_PRIMARY_TEXT,
               variant: 'h6',
             },
             secondary: {
               color: 'secondary',
-              value: parse(GETTING_STARTED_STEP_1_SECONDARY_TEXT(MIN_WAGER, cointoss.tokens)),
+              value: GETTING_STARTED_STEP_1_SECONDARY_TEXT(MIN_WAGER, cointoss.tokens),
               variant: 'h7',
             },
           },
           {
             primary: {
               color: 'secondary',
-              value: parse(GETTING_STARTED_STEP_2_PRIMARY_TEXT),
+              value: GETTING_STARTED_STEP_2_PRIMARY_TEXT,
               variant: 'h6',
             },
           },
           {
             primary: {
               color: 'secondary',
-              value: parse(GETTING_STARTED_STEP_3_PRIMARY_TEXT),
+              value: GETTING_STARTED_STEP_3_PRIMARY_TEXT,
               variant: 'h6',
             },
           },
@@ -91,14 +90,14 @@ const HowToPlay = () => {
           {
             primary: {
               color: 'secondary',
-              value: parse(REWARD_SYSTEM_TEXT_STEP_1_PRIMARY_TEXT),
+              value: REWARD_SYSTEM_TEXT_STEP_1_PRIMARY_TEXT,
               variant: 'h6',
             },
           },
           {
             primary: {
               color: 'secondary',
-              value: parse(REWARD_SYSTEM_TEXT_STEP_2_PRIMARY_TEXT),
+              value: REWARD_SYSTEM_TEXT_STEP_2_PRIMARY_TEXT,
               variant: 'h6',
             },
           },
