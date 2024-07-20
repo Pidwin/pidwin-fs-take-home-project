@@ -1,0 +1,39 @@
+properties:
+  answer:
+    type: string
+    enum:
+      - 'heads'
+      - 'tails'
+  consecutive:
+    type: number
+  guess:
+    type: string
+    enum:
+      - 'heads'
+      - 'tails'
+  payout:
+    type: string
+    pattern: "^-?[0-9]*$"
+  rate:
+    type: string
+    pattern: "^-?[0-9]*$"
+  tokens:
+    type: string
+    pattern: "^-?[0-9]*$"
+  wager:
+    type: string
+    pattern: "^-?[0-9]*$"
+  winner:
+    type: boolean
+  history:
+    type: array
+    items:
+      type: object
+      required:
+      - answer
+      - payout
+      - rate
+      - tokens
+      - wager
+      - winner
+      $ref: '../api.yaml#/components/schemas/HistoryResult'

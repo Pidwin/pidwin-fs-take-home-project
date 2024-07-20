@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "../constants/actionTypes";
+import { LOGIN, LOGOUT, WAGER } from "../constants/actionTypes";
 import * as api from "../api";
 import * as messages from "../messages";
 
@@ -6,6 +6,7 @@ export const signup = (formData, history) => async (dispatch) => {
   try {
     const { data } = await api.signUp(formData);
     dispatch({ type: LOGIN, data });
+    dispatch({ type: WAGER, data });
     history("/");
     messages.success("Login Successful");
   } catch (error) {
@@ -17,6 +18,7 @@ export const login = (formData, history) => async (dispatch) => {
   try {
     const { data } = await api.login(formData);
     dispatch({ type: LOGIN, data });
+    dispatch({ type: WAGER, data });
     history("/");
     messages.success("Login Successful");
   } catch (error) {

@@ -1,11 +1,12 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.js";
+import bigInt from '../utils/big-int.js';
 
 const signup = async (req, res) => {
-  const { email, password, confirmPassword, firstName, lastName } = req.body;
-
   try {
+    const { email, password, confirmPassword, firstName, lastName } = req.body;
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User Already Exist" });
@@ -28,14 +29,16 @@ const signup = async (req, res) => {
         email: result.email,
         password: result.hashedPassword,
       },
-      "test",
-      { expiresIn: "1h" }
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({
+      token,
+      tokens: result.tokens.toString()
+    });
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
-    console.log(error);
+    res.status(500).json({ message: 'Something went wrong' });
   }
 };
 

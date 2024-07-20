@@ -1,0 +1,9 @@
+required:
+- answer
+- payout
+- rate
+- tokens
+- wager
+- winner
+- history
+$ref: '../api.yaml#/components/schemas/HistoryResult'

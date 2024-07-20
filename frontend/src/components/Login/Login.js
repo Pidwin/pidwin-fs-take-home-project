@@ -7,11 +7,10 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import Input from "./Input";
-import { jwtDecode } from "jwt-decode";
-import { useDispatch } from "react-redux";
+import Input from '../Input/Input';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { signup, login } from "../../actions/login";
+import { signup, login as loginAction } from "../../actions/login";
 import LockIcon from "@mui/icons-material/LockOutlined";
 import { styles } from "./styles";
 
@@ -27,9 +26,8 @@ const Login = () => {
   const [formData, setFormData] = useState(formDataInitVal);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const user = localStorage.getItem("profile")
-    ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
-    : "null";
+
+  const { login } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -37,7 +35,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
-      dispatch(login(formData, history));
+      dispatch(loginAction(formData, history));
     } else {
       dispatch(signup(formData, history));
     }
@@ -47,16 +45,15 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleShowPassword = (e) => {
+  const handleShowPassword = () => {
     setShowPassword((prevPassword) => !prevPassword);
   };
 
-  const switchLogin = (e) => {
+  const switchLogin = () => {
     setIsLoggedIn((prevState) => !prevState);
   };
 
-  if (user !== "null" && user !== null) {
-    history("/");
+  if (login.token !== 'null' && login.token !== null) {
     return null;
   } else {
     return (

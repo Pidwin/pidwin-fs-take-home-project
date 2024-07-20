@@ -3,13 +3,13 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
-
   try {
+    const { email, password } = req.body;
+
     const existingUser = await User.findOne({ email });
 
     if (!existingUser) {
-      return res.status(404).json({ message: "User Does Not Exist" });
+      return res.status(404).json({ message: 'User Not Found' });
     }
 
     const isPasswordCorrect = await bcrypt.compare(
@@ -28,13 +28,16 @@ const login = async (req, res) => {
         email: existingUser.email,
         password: existingUser.password,
       },
-      "test",
-      { expiresIn: "1h" }
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({
+      token,
+      tokens: existingUser.tokens.toString()
+    });
   } catch (error) {
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(500).json({ message: 'Something went wrong' });
   }
 };
 

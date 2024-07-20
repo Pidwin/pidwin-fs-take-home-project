@@ -30,6 +30,10 @@ export const styles = {
     display: "flex",
     alignItems: "center",
   },
+  coins: {
+    display: "flex",
+    alignItems: "center",
+  },
   brandContainer: {
     display: "flex",
     alignItems: "center",

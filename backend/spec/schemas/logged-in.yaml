@@ -1,0 +1,8 @@
+required:
+  - token
+properties:
+  token:
+    type: string
+  tokens:
+    type: string
+    pattern: "^-?[0-9]*$"
