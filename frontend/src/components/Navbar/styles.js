@@ -19,11 +19,14 @@ export const styles = {
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
-    width: "1000px",
   },
   profile: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignContent: "stretch",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    alignItems: "center",
     width: "600px",
   },
   userName: {
@@ -38,4 +41,8 @@ export const styles = {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
   },
+  token_amount: {
+    color: "rgba(0,183,255, 1)",
+    textDecoration: "none",
+  }
 };

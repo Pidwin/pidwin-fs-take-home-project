@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Typography, Toolbar, Avatar, Button } from "@mui/material";
+import { Box, AppBar, Typography, Button, useMediaQuery } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import * as actionType from "../../constants/actionTypes";
 import { styles } from "./styles";
+import AccountMenu from "../AccountMenu/AccountMenu";
+import { useCallback } from "react";
+import { getTokenAmount } from "../../actions/toss";
 
 const Navbar = () => {
   const [user, setUser] = useState(
@@ -12,15 +15,17 @@ const Navbar = () => {
       ? jwtDecode(JSON.parse(localStorage.getItem("profile")).token)
       : "null"
   );
+  const token_amount = useSelector((state) => state.wagerReducer.tokenAmount);
+
   const dispatch = useDispatch();
   let location = useLocation();
   const history = useNavigate();
 
-  const logout = () => {
+  const logout = useCallback(() => {
     dispatch({ type: actionType.LOGOUT });
     history("/auth");
     setUser("null");
-  };
+  }, [dispatch, history]);
 
   useEffect(() => {
     if (user !== "null" && user !== null) {
@@ -32,6 +37,11 @@ const Navbar = () => {
         : "null"
     );
   }, [location]);
+
+  useEffect(() => {
+    dispatch(getTokenAmount());
+  }, [])
+  const isBigScreen = useMediaQuery((theme) => theme.breakpoints.up('sm'));
 
   return (
     <AppBar sx={styles.appBar} position="static" color="inherit">
@@ -46,44 +56,29 @@ const Navbar = () => {
           CoinToss
         </Typography>
       </div>
-      <Toolbar sx={styles.toolbar}>
-        {user !== "null" && user !== null ? (
-          <div sx={styles.profile}>
-            <Avatar sx={styles.purple} alt={user.name} src={user.picture}>
-              {user.name.charAt(0)}
-            </Avatar>
-            <Typography sx={styles.userName} variant="h6">
-              {user.name}
+      {user !== "null" && user !== null ? (
+        <Box sx={{ ...styles.profile, display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+          {isBigScreen ? (
+            <Typography
+              variant="h6"
+              align="center"
+              sx={styles.token_amount}
+            >
+              Token Amount : {token_amount}
             </Typography>
-            <Button
-              variant="contained"
-              sx={styles.logout}
-              color="secondary"
-              onClick={logout}
-            >
-              Logout
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                history("/password");
-              }}
-            >
-              Set Password
-            </Button>
-          </div>
-        ) : (
-          <Button
-            component={Link}
-            to="/auth"
-            variant="contained"
-            color="primary"
-          >
-            Login
-          </Button>
-        )}
-      </Toolbar>
+          ) : (<></>)}
+          <AccountMenu user_data={user} setUser={setUser} />
+        </Box>
+      ) : (
+        <Button
+          component={Link}
+          to="/auth"
+          variant="contained"
+          color="primary"
+        >
+          Login
+        </Button>
+      )}
     </AppBar>
   );
 };

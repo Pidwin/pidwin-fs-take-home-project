@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import login from "./login";
-
+import loginReducer from "./login";
+import wagerReducer from "./wager";
 export default combineReducers({
-    login
+    loginReducer,
+    wagerReducer
 });
