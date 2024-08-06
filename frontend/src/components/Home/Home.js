@@ -11,6 +11,8 @@ import { wagerRequest } from "../../actions/toss";
 import Coin from "../Coin/coin";
 import { SETFLIP, TOKENAMOUNT } from "../../constants/actionTypes";
 import { recentWagers } from "../../actions/toss";
+import LeaderBoardTable from "../LeaderBoardTable/LeaderBoardTable";
+import { getTopTenPlayer } from "../../actions/toss";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const Home = () => {
   const result = useSelector((state) => state.wagerReducer.wagerStatus);
   const flip = useSelector((state) => state.wagerReducer.flip);
   const recentWager = useSelector((state) => state.wagerReducer.wagerHistory);
+  const topTenPlayer = useSelector((state) => state.wagerReducer.topTenPlayer);
 
   const isSingedIn = user;
   const [wagerAmount, setWagerAmount] = useState(1);
@@ -34,6 +37,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(recentWagers());
+    dispatch(getTopTenPlayer());
   }, [])
 
   return (
@@ -65,6 +69,9 @@ const Home = () => {
                 </Grid>
                 <Grid container justifyContent={'center'} padding={1}>
                   <HistoryTable recentWager={recentWager} />
+                </Grid>
+                <Grid container justifyContent={'center'} padding={1}>
+                  <LeaderBoardTable topTenPlayer={topTenPlayer} />
                 </Grid>
               </Container>
             </div>
