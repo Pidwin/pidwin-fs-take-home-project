@@ -4,3 +4,4 @@ export const WAGERHISTORY = "WAGERHISTORY";
 export const WAGERSTATUS = "WAGERSTATUS";
 export const TOKENAMOUNT = "TOKENAMOUNT";
 export const SETFLIP = "SETFLIP";
+export const TOPTENPLAYER = "TOPTENPLAYER";

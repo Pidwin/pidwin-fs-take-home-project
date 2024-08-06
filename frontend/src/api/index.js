@@ -13,6 +13,7 @@ export const login = (formData) => API.post("/api/user/login", formData);
 export const signUp = (formData) => API.post("/api/user/signup", formData);
 export const wagerRequest = (param) => API.post("/api/user/wager", param);
 export const recentWagers = () => API.get("/api/user/recent-wagers");
+export const getTopTenPlayer = () => API.get("/api/user/toptenplayer");
 export const getTokenAmount = () => API.get("/api/user/get-token-amount");
 export const changePassword = (formData) =>
   API.post("/api/user/changePassword", formData);

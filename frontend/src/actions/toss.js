@@ -1,5 +1,5 @@
 import * as api from '../api';
-import { SETFLIP, TOKENAMOUNT, WAGERHISTORY, WAGERSTATUS } from '../constants/actionTypes';
+import { SETFLIP, TOKENAMOUNT, TOPTENPLAYER, WAGERHISTORY, WAGERSTATUS } from '../constants/actionTypes';
 import * as messages from '../messages'
 
 export const wagerRequest = (flip, wagerAmount, wagering) => async (dispatch) => {
@@ -30,6 +30,17 @@ export const recentWagers = () => async (dispatch) => {
         messages.error(error.response.data.message);
     }
 }
+
+export const getTopTenPlayer = () => async (dispatch) => {
+    try {
+        const { data } = await api.getTopTenPlayer();
+        console.log(data)
+        dispatch({ type: TOPTENPLAYER, data: data })
+    } catch (error) {
+        messages.error(error.response.data.message);
+    }
+}
+
 
 export const getTokenAmount = () => async (dispatch) => {
     try {

@@ -6,6 +6,7 @@ import auth from "../utils/auth.js";
 import handleCoinToss from "./wager.js";
 import recentWager from "./history.js";
 import getTokenAmount from "./getTokenAmount.js";
+import getTopTenPlayer from "./getTopTenPlayer.js";
 
 const router = express.Router();
 
@@ -15,5 +16,7 @@ router.post("/changePassword", auth, changePassword);
 router.post("/wager", auth, handleCoinToss);
 router.get("/recent-wagers", auth, recentWager);
 router.get("/get-token-amount", auth, getTokenAmount);
+router.get("/toptenplayer", auth, getTopTenPlayer);
+
 
 export default router;
