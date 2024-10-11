@@ -31,7 +31,3 @@ Now in the backend folder. Run the start
 The backend is now up and running.
 
 ---
-
-## Frontend
-
-The frontend is your standard create-react-app, the default ReadME is provided under frontend/readme.md for reference.
