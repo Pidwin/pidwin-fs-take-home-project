@@ -13,7 +13,7 @@ import PasswordSetting from "./components/PasswordSettings/PasswordSettings";
 const App = () => {
   return (
     <BrowserRouter>
-      <Container maxWidth="lg">
+      <Container maxWidth="sm">
         <Navbar />
         <ToastContainer
           position="bottom-left"

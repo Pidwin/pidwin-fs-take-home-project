@@ -43,7 +43,7 @@ const PasswordSetting = () => {
   };
 
   useEffect(() => {
-    if (isSingedIn == "null" || isSingedIn === null) {
+    if (isSingedIn === "null" || isSingedIn === null) {
       history("/");
     }
   }, []);
