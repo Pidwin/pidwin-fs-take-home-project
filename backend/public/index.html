@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.IO with Token</title>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+  </head>
+  <body>
+    <h1>Test for Socket.IO with Token Authentication</h1>
+
+    <script>
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3MDZmNDczMDRmMWU2OGM3YmQ0ZmMiLCJuYW1lIjoiZ2lvIGdhc3AiLCJlbWFpbCI6Imdpb0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMiRYZW5YcWh0cnl6TlhPbXVvZ1JnUUZ1ck9POTZLeWR0cjJzOTJLOGNtdnB6cmdyaG9nRmphLiIsImlhdCI6MTczODA3Njg5NCwiZXhwIjoxNzM4MDgwNDk0fQ.LckNVGxtrOKY5se28D_sq1VxEQd8iCWn2VYPAn5EC4U"; // Replace with the actual token
+
+      // Initialize the socket connection and send the token via the `auth` option
+      const socket = io("http://localhost:5001", {
+        auth: {
+          token: token, // Send the token to the server in the handshake
+        },
+      });
+      console.log("Client socket id " + socket.id);
+
+      // Handle successful connection
+      socket.on("connect", () => {
+        console.log("Connected to server!");
+        socket.emit("message", "Hello from the client siiiiide!");
+      });
+
+      socket.on("gameResultToUser", (data) => {
+        console.log("Bet Result:", data);
+      });
+      // Listen for server messages
+      socket.on("broadcastMessage", (data) => {
+        console.log("Broadcast Message:", data);
+      });
+
+      // Handle connection errors
+      socket.on("connect_error", (err) => {
+        console.error("Connection error:", err.message);
+      });
+    </script>
+  </body>
+</html>
