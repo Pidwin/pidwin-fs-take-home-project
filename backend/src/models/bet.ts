@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import { IBet } from "../types/bet.interace";
 
-const betSchema = mongoose.Schema({
+const betSchema = new Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
-  //   amount: { type: Number, required: true },
   guess: {
     type: Boolean,
     required: true,
@@ -25,6 +25,6 @@ const betSchema = mongoose.Schema({
     default: Date.now,
   },
 });
-const Bet = mongoose.model("Bet", betSchema);
+const Bet = mongoose.model<IBet>("Bet", betSchema);
 
 export default Bet;

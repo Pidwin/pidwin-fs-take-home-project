@@ -1,10 +1,10 @@
 import express from "express";
-import login from "./user-login.js";
-import signup from "./user-signup.js";
-import changePassword from "./user-change-password.js";
-import { auth } from "../../utils/auth.js";
-import getUserBets from "./user-bets.js";
-import getUserStreakInformation from "./user-streaks.js";
+import login from "./user-login";
+import signup from "./user-signup";
+import changePassword from "./user-change-password";
+import { auth } from "../../utils/auth";
+import getUserBets from "./user-bets";
+import getUserStreakInformation from "./user-streaks";
 import { body } from "express-validator";
 
 const router = express.Router();

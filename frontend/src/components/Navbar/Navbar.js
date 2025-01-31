@@ -43,7 +43,7 @@ const Navbar = () => {
           variant="h5"
           align="center"
         >
-          CoinToss
+          Pidwin
         </Typography>
       </div>
       <Toolbar sx={styles.toolbar}>

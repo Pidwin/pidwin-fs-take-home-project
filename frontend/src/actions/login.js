@@ -9,6 +9,7 @@ export const signup = (formData, history) => async (dispatch) => {
     history("/");
     messages.success("Login Successful");
   } catch (error) {
+    console.log(error);
     messages.error(error.response.data.message);
   }
 };
@@ -20,6 +21,7 @@ export const login = (formData, history) => async (dispatch) => {
     history("/");
     messages.success("Login Successful");
   } catch (error) {
+    console.log(error);
     messages.error(error.response.data.message);
   }
 };

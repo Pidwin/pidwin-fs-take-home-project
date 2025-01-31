@@ -9,6 +9,9 @@ import Navbar from "./components/Navbar/Navbar";
 import Login from "./components/Login/Login";
 import Home from "./components/Home/Home";
 import PasswordSetting from "./components/PasswordSettings/PasswordSettings";
+import GamePage from "./components/GamePage";
+import Leaderboard from "./components/Leaderboard";
+import UserBets from "./components/UserBets";
 
 const App = () => {
   return (
@@ -30,6 +33,9 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/auth" element={<Login />} />
           <Route exact path="/password" element={<PasswordSetting />} />
+          <Route exact path="/games/lucky" element={<GamePage />} />
+          <Route exact path="/games/leaderboard" element={<Leaderboard />} />
+          <Route exact path="/user/bets" element={<UserBets />} />
         </Routes>
       </Container>
     </BrowserRouter>

@@ -13,12 +13,11 @@
       const token = ""; // Replace with the actual token
 
       // Initialize the socket connection and send the token via the `auth` option
-      const socket = io("http://localhost:5001", {
+      const socket = io("http://localhost:5000", {
         auth: {
           token: token, // Send the token to the server in the handshake
         },
       });
-      console.log("Client socket id " + socket.id);
 
       // Handle successful connection
       socket.on("connect", () => {

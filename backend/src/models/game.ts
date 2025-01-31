@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import { IGame } from "../types/game.interface";
 
-const gameSchema = mongoose.Schema({
+const gameSchema = new Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -9,9 +10,6 @@ const gameSchema = mongoose.Schema({
     type: [Number],
     default: null,
   },
-  // (Note)
-  // You can also game type to make this work for various dice based games
-  // You can change isLucky to a field to hold the required result
   isLucky: {
     type: Boolean,
     default: null,
@@ -32,6 +30,6 @@ const gameSchema = mongoose.Schema({
   },
 });
 
-const Game = mongoose.model("Game", gameSchema);
+const Game = mongoose.model<IGame>("Game", gameSchema);
 
 export default Game;
