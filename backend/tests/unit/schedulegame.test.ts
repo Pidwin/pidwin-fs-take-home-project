@@ -142,8 +142,6 @@ describe("Game Scheduler Tests", () => {
     );
   });
   test("should be null for no activity", async () => {
-    // scheduleGames();
-
     expect(getActiveTimeoutId()).toBeNull();
   });
 });

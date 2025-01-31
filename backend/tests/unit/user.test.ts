@@ -59,7 +59,7 @@ describe("POST /login", () => {
       .send({ email: "fake@example.com", password });
 
     expect(response.status).toBe(404);
-    expect(response.body.message).toBe("User Does Not Exist");
+    expect(response.body.message).toBe("Please create an Account");
   });
 
   it("should return error if password is incorrect", async () => {
@@ -68,7 +68,7 @@ describe("POST /login", () => {
       .send({ email, password: incorrectPassword });
 
     expect(response.status).toBe(400);
-    expect(response.body.message).toBe("Invalid Password");
+    expect(response.body.message).toBe("Please check your Credentials");
   });
 
   test("should create a new game", async () => {
